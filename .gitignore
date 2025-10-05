@@ -6,7 +6,6 @@ node_modules
 frontend/node_modules/
 frontend/dist/
 
-
 # Go
 *.exe
 *.exe~
@@ -27,3 +26,7 @@ go.work
 # OS
 .DS_Store
 Thumbs.db
+
+# local env files
+.env*.local
+.env

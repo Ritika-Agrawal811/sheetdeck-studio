@@ -2,7 +2,10 @@ package main
 
 import (
 	"embed"
+	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -12,14 +15,25 @@ import (
 var assets embed.FS
 
 func main() {
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found, using system environment variables")
+	}
+
+	// Get base URL from environment
+	baseURL := os.Getenv("API_BASE_URL")
+	if baseURL == "" {
+		baseURL = "http://localhost:1323"
+	}
+
 	// Create an instance of the app structure
-	app := NewApp()
+	app := NewApp(baseURL)
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "temp-wails",
-		Width:  1024,
-		Height: 768,
+		Title:  "SheetDeck Studio",
+		Width:  1400,
+		Height: 900,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
