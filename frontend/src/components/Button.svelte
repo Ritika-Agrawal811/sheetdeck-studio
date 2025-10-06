@@ -1,13 +1,13 @@
+<button class="{variant} {icon && 'flex'}" {type} {disabled} on:click>
+  <slot />
+</button>
+
 <script lang="ts">
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let variant: 'fill' | 'outline' = 'fill';
   export let icon: boolean = false;
   export let disabled: boolean = false;
 </script>
-
-<button class="{variant} {icon && 'flex'}" {type} {disabled} on:click>
-  <slot />
-</button>
 
 <style>
   button {
@@ -30,7 +30,7 @@
 
   button.fill {
     background: #3b82f6;
-    color: white
+    color: white;
   }
 
   button.fill:hover:not(:disabled) {
@@ -49,7 +49,7 @@
     color: #fff;
     transform: translateY(-1px);
   }
-  
+
   button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
