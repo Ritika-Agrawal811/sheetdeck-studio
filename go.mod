@@ -1,8 +1,11 @@
 module sheetdeck-studio
 
-go 1.23
+go 1.23.2
+
+toolchain go1.23.4
 
 require (
+	github.com/ansxuman/go-touchid v0.0.0-20241021115423-60941306d4c3
 	github.com/joho/godotenv v1.5.1
 	github.com/wailsapp/wails/v2 v2.10.2
 )

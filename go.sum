@@ -1,3 +1,5 @@
+github.com/ansxuman/go-touchid v0.0.0-20241021115423-60941306d4c3 h1:cgxcPY4gHIzqoTPzZWo2cdj0wIdUeQDlgxzLWpcWJZE=
+github.com/ansxuman/go-touchid v0.0.0-20241021115423-60941306d4c3/go.mod h1:SZgGQD5WyV7ZMh6FMUmfozePvKhK3uxoHTnlo7lzM/E=
 github.com/bep/debounce v1.2.1 h1:v67fRdBA9UQu2NhLFXrSg0Brw7CexQekrBwDMM8bzeY=
 github.com/bep/debounce v1.2.1/go.mod h1:H8yggRPQKLUhUoqrJC1bO2xNya7vanpDl7xR3ISbCJ0=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
