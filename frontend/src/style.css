@@ -6,9 +6,24 @@
   box-sizing: border-box;
 }
 
+:root {
+  --background: #fefefe;
+  --text-color: #171717;
+
+  --blue-color: #3b82f6;
+  --hover-blue-color: #2056cc;
+
+  --orange-color: rgb(242, 169, 35);
+  --green-color: #10b981;
+
+  --light-gray-color: #fafafa;
+  --gray-color: #e6e7eb;
+  --dark-gray-color: #7d7d7d;
+}
+
 html {
-  background-color: #fefefe;
-  color: #171717;
+  background-color: var(--background);
+  color: var(--text-color);
 }
 
 body {

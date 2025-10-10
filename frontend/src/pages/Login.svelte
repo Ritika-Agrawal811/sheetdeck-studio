@@ -13,12 +13,12 @@
         id="email"
         bind:value={email}
       />
-      <Input type="password" bind:value={email} label="Password" id="password" />
-      <Button>Login</Button>
+      <Input type="password" bind:value={password} label="Password" id="password" />
+      <Button width="full" icon={true}><LogIn size={30} /> Login</Button>
 
       {#if isMacOS}
         <div class="divider"><span>OR</span></div>
-        <Button type="button" variant="outline" icon={true} on:click={handleTouchID}>
+        <Button type="button" variant="outline" width="full" icon={true} on:click={handleTouchID}>
           <Fingerprint size={30} />
           Use Fingerprint
         </Button>
@@ -30,9 +30,10 @@
 <script lang="ts">
   import Input from '../components/Input.svelte';
   import Button from '../components/Button.svelte';
-  import { Fingerprint } from 'lucide-svelte';
+  import { Fingerprint, LogIn } from 'lucide-svelte';
 
   import { AuthenticateWithTouchID, IsMacOS } from '../../wailsjs/go/main/App';
+  import { login } from '../stores/auth';
   import { onMount } from 'svelte';
 
   /* ----- Variables ------- */
@@ -59,6 +60,7 @@
 
       if (success) {
         alert('Touch ID authentication successful! 🎉');
+        login();
       }
     } catch (err) {
       alert(`Error: ${err}`);
@@ -75,17 +77,19 @@
     height: calc(100vh - 10em);
   }
 
+  /* ---- circles ------ */
+
   .circle {
     position: absolute;
     border-radius: 100%;
   }
 
   .circle.orange {
-    background-color: rgb(242, 169, 35);
+    background-color: var(--orange-color);
   }
 
   .circle.gray {
-    background-color: #e6e7eb;
+    background-color: var(--gray-color);
   }
 
   .circle.small {
@@ -134,16 +138,21 @@
     text-align: center;
   }
 
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+  }
+
   .divider {
     position: relative;
     text-align: center;
-    margin: 2em 0;
   }
 
   .divider span {
     padding: 0 1em;
-    background-color: #fff;
-    color: #7d7d7d;
+    background-color: var(--background);
+    color: var(--dark-gray-color);
   }
 
   .divider::before {
@@ -151,7 +160,7 @@
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: #7d7d7d;
+    background-color: var(--dark-gray-color);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
