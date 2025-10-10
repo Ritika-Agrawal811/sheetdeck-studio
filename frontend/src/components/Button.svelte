@@ -1,25 +1,53 @@
-<button class="{variant} {icon && 'flex'}" {type} {disabled} on:click>
+<button class="{variant} {icon && 'flex'} {width} {size}" {type} {disabled} on:click>
   <slot />
 </button>
 
 <script lang="ts">
   export let type: 'button' | 'submit' | 'reset' = 'button';
-  export let variant: 'fill' | 'outline' = 'fill';
+  export let variant: 'fill' | 'outline' | 'default' = 'fill';
+  export let width: 'full' | 'fit' = 'fit';
+  export let size: 'small' | 'default' | 'big' = 'default';
   export let icon: boolean = false;
   export let disabled: boolean = false;
 </script>
 
 <style>
   button {
-    width: 100%;
-    padding: 0.85rem 3rem;
     border: none;
     border-radius: 100vmax;
     cursor: pointer;
-    font-size: 1.25rem;
     font-weight: 500;
     transition: all 0.2s;
   }
+
+  /* ----- size classes ----- */
+
+  button.small {
+    padding: 0.75em 1.05em;
+    font-size: 1rem;
+  }
+
+  button.default {
+    padding: 0.75em 1.15em;
+    font-size: 1.15rem;
+  }
+
+  button.big {
+    padding: 0.75em 2.5em;
+    font-size: 1.15rem;
+  }
+
+  /* ----- width classes ----- */
+
+  button.fit {
+    width: fit-content;
+  }
+
+  button.full {
+    width: 100%;
+  }
+
+  /* ----- icon classes ----- */
 
   button.flex {
     display: flex;
@@ -28,27 +56,42 @@
     gap: 0.75em;
   }
 
+  /* ----- variant classes ----- */
+
+  button.default {
+    background-color: var(--light-gray-color);
+    color: var(--dark-gray-color);
+    border: 1px solid var(--gray-color);
+  }
+
+  button.default:hover:not(:disabled) {
+    background-color: var(--gray-color);
+    transform: translateY(-1px);
+  }
+
   button.fill {
-    background: #3b82f6;
-    color: white;
+    background: var(--blue-color);
+    color: var(--background);
   }
 
   button.fill:hover:not(:disabled) {
-    background: #2563eb;
+    background: var(--hover-blue-color);
     transform: translateY(-1px);
   }
 
   button.outline {
-    background-color: transparent;
-    border: 2px solid rgb(242, 169, 35);
-    color: rgb(242, 169, 35);
+    background-color: var(--background);
+    border: 2px solid var(--orange-color);
+    color: var(--orange-color);
   }
 
   button.outline:hover:not(:disabled) {
-    background-color: rgb(242, 169, 35);
-    color: #fff;
+    background-color: var(--orange-color);
+    color: var(--background);
     transform: translateY(-1px);
   }
+
+  /* ----- extra classes ----- */
 
   button:disabled {
     opacity: 0.5;

@@ -1,25 +1,30 @@
 <div class="input-container">
   <label for={id}>{label}</label>
-  <input {type} {placeholder} {value} on:input on:focus on:blur {id} />
+  <input {type} {placeholder} {value} on:input={handleInput} {id} />
 </div>
 
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
   export let type: string = 'text';
   export let label: string = 'Name';
   export let id: string = 'username';
   export let placeholder: string = '';
-  export let value: string = ''; // Add this for two-way binding
+  export let value: string = '';
+
+  const dispatch = createEventDispatcher();
+
+  const handleInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    value = target.value;
+    dispatch('change', value);
+  };
 </script>
 
 <style>
-  .input-container {
-    margin: 2em 0;
-  }
-
   label {
     font-size: 1.15rem;
     margin-bottom: 1rem;
-    width: fit-content;
   }
 
   input {
@@ -28,7 +33,7 @@
     font-size: 1.15rem;
     outline: none;
     border: none;
-    border-bottom: 2px solid #3b82f6;
+    border-bottom: 2px solid var(--blue-color);
     background: transparent;
   }
 
@@ -38,7 +43,7 @@
 
   /* Focus styles */
   input:focus {
-    border-bottom-color: #f59e0b;
+    border-bottom-color: var(--orange-color);
   }
 
   /* Disabled state */
