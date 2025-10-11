@@ -8,13 +8,7 @@
         <Input label="Title" id="sheet-title" bind:value={title} />
         <Input label="Slug" id="sheet-slug" bind:value={slug} />
         <div class="category-container">
-          <Dropdown
-            list={$categories}
-            name="categories"
-            label="Category"
-            id="category-select"
-            bind:value={category}
-          />
+          <Dropdown list={$categories} name="categories" label="Category" id="category-select" bind:value={category} />
           <Dropdown
             list={$subcategories}
             name="subcategories"
@@ -55,13 +49,7 @@
             <Button type="button" on:click={handleBrowseClick}>Browse File</Button>
           {/if}
 
-          <input
-            type="file"
-            id="cheatsheet-image"
-            accept=".webp"
-            bind:this={fileInput}
-            on:change={handleFileChange}
-          />
+          <input type="file" id="cheatsheet-image" accept=".webp" bind:this={fileInput} on:change={handleFileChange} />
         </div>
         {#if selectedFile}
           <article class="file-info">
@@ -114,10 +102,12 @@
   let subcategory: string = '';
   let metadata: CreateCheatsheetMetadata | null = null;
 
+  /* ---- cheatsheet image ---- */
   let fileInput: HTMLInputElement;
   let selectedFile: File | null = null;
   let previewUrl: string | null = null;
 
+  /* ---- Set cheat sheet metadata and slug ---- */
   $: metadata = { title, slug, category, subcategory };
   $: metadataString = JSON.stringify(metadata, null, 2).trim();
 
@@ -125,12 +115,19 @@
     slug = `${category}-`;
   }
 
+  /**
+   * Trigger file input to open upload dialog
+   * @param e
+   */
   const handleBrowseClick = (e?: Event) => {
     e?.stopPropagation();
     fileInput?.click();
     console.log('clicked');
   };
 
+  /**
+   * Remove the selected file and reset preview url
+   */
   const handleRemoveSelectedFile = () => {
     selectedFile = null;
 
@@ -144,6 +141,10 @@
     }
   };
 
+  /**
+   * Handle the selected file, check against contrainst and set the preview URL
+   * @param event
+   */
   const handleFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
