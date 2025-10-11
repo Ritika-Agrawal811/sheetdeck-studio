@@ -6,8 +6,8 @@
 
     {#if $isAuthenticated}
       <Button type="button" variant="fill" size="small" icon={true} on:click={logout}
-        ><LogOut size={20} /> Logout
-      </Button>
+        ><LogOut size={20} /> Logout</Button
+      >
     {/if}
   </nav>
 </header>

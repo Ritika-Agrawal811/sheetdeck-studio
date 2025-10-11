@@ -4,9 +4,9 @@
 
 <script lang="ts">
   export let type: 'button' | 'submit' | 'reset' = 'button';
-  export let variant: 'fill' | 'outline' | 'default' = 'fill';
+  export let variant: 'fill' | 'outline' | 'default' | 'transparent' = 'fill';
   export let width: 'full' | 'fit' = 'fit';
-  export let size: 'small' | 'default' | 'big' = 'default';
+  export let size: 'tiny' | 'small' | 'default' | 'big' = 'default';
   export let icon: boolean = false;
   export let disabled: boolean = false;
 </script>
@@ -21,6 +21,11 @@
   }
 
   /* ----- size classes ----- */
+
+  button.tiny {
+    padding: 0.65em;
+    font-size: 0.95rem;
+  }
 
   button.small {
     padding: 0.75em 1.05em;
@@ -56,6 +61,14 @@
     gap: 0.75em;
   }
 
+  button.small.flex{
+    gap: 0.5em;
+  }
+
+  button.tiny.flex  {
+    gap: 0.15em;
+  }
+
   /* ----- variant classes ----- */
 
   button.default {
@@ -89,6 +102,15 @@
     background-color: var(--orange-color);
     color: var(--background);
     transform: translateY(-1px);
+  }
+
+  button.transparent {
+    background-color: transparent;
+    color: var(--dark-gray-color);
+  }
+
+  button.transparent:hover {
+    color: var(--blue-color);
   }
 
   /* ----- extra classes ----- */

@@ -6,13 +6,7 @@
   <div class="container">
     <h2>Login</h2>
     <form on:submit|preventDefault={handleLogin}>
-      <Input
-        type="email"
-        placeholder="example@gmail.com"
-        label="Email"
-        id="email"
-        bind:value={email}
-      />
+      <Input type="email" placeholder="example@gmail.com" label="Email" id="email" bind:value={email} />
       <Input type="password" bind:value={password} label="Password" id="password" />
       <Button width="full" icon={true}><LogIn size={30} /> Login</Button>
 
@@ -36,24 +30,28 @@
   import { login } from '../stores/auth';
   import { onMount } from 'svelte';
 
-  /* ----- Variables ------- */
-
+  /* ----- Auth variables ------- */
   let email = '';
   let password = '';
   let isMacOS = false;
 
+  /* ---- Detect if the device is MacOS ---- */
   onMount(async () => {
     isMacOS = await IsMacOS();
   });
 
-  /* ----- Functions ------- */
-
+  /**
+   * Handle email - password login
+   */
   const handleLogin = () => {
     console.log('Email:', email);
     console.log('Password:', password);
     alert('Login clicked!');
   };
 
+  /**
+   * Handle Finger Touch Auth for MacOS
+   */
   const handleTouchID = async () => {
     try {
       const success = await AuthenticateWithTouchID();
