@@ -1,6 +1,6 @@
 <aside class:minimize={isMinimized}>
-  <div class="flex-center upload-btn" class:selected={activePath === 'upload'}>
-    <Button size="small" variant="outline" icon={true} on:click={() => handleMenuClick('upload')}>
+  <div class="flex-center upload-btn" class:selected={$activePath === 'upload'}>
+    <Button size="small" variant="outline" icon={true} on:click={() => setActivePath('upload')}>
       <ImageUp size={22} />
       <span class="text">Upload New Sheet</span>
     </Button>
@@ -27,9 +27,9 @@
         <li
           role="tab"
           tabindex="0"
-          class:selected={activePath === item.path}
-          on:click={() => handleMenuClick(item.path)}
-          on:keydown={(e) => e.key === 'Enter' && handleMenuClick(item.path)}
+          class:selected={$activePath === item.path}
+          on:click={() => setActivePath(item.path)}
+          on:keydown={(e) => e.key === 'Enter' && setActivePath(item.path)}
         >
           <svelte:component this={item.icon} size={25} />
           <span class="text">{item.label}</span>
@@ -44,6 +44,9 @@
   import Button from '../components/Button.svelte';
   import type { ComponentType } from 'svelte';
 
+  import { activePath, setActivePath } from '../stores/navigate';
+  import type { Paths } from '../stores/navigate';
+
   /* ---- Toggle sidebar width ---- */
   let isMinimized = false;
 
@@ -56,7 +59,7 @@
   type NavItem = {
     label: string;
     icon: ComponentType;
-    path: string;
+    path: Paths;
   };
 
   const navItems: NavItem[] = [
@@ -64,17 +67,11 @@
     { label: 'Cheat Sheets', icon: FileText, path: 'cheatsheet' },
     { label: 'Analytics', icon: ChartNoAxesCombined, path: 'analytics' },
   ];
-
-  let activePath = navItems[0].path;
-
-  const handleMenuClick = (path: string) => {
-    activePath = path;
-  };
 </script>
 
 <style>
   aside {
-    width: min(20vw, 500px);
+    width: 300px;
     height: 100%;
     background-color: var(--gray-color);
     border-radius: 0 3em 0 0;
@@ -94,7 +91,7 @@
 
   aside .text {
     visibility: visible;
-    transition: visibility 0s 0.1s;
+    transition: visibility 0s 0.7s;
     white-space: nowrap;
   }
 
