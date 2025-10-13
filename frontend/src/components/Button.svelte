@@ -61,11 +61,11 @@
     gap: 0.75em;
   }
 
-  button.small.flex{
+  button.small.flex {
     gap: 0.5em;
   }
 
-  button.tiny.flex  {
+  button.tiny.flex {
     gap: 0.15em;
   }
 
