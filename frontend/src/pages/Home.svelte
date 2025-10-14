@@ -5,9 +5,9 @@
     <article class="stat-card vertical cheatsheet-count-card">
       <div class="stat-header">
         <h3>Total Cheat sheets</h3>
-        <span class="stat-redirect-icon">
+        <button class="stat-redirect-icon" on:click={() => setActivePath('cheatsheet')}>
           <MoveUpRight size={20} />
-        </span>
+        </button>
       </div>
       <span class="stat">{$stats.totalCheatsheets}</span>
     </article>
@@ -33,7 +33,6 @@
       </div>
       <span class="stat">{$stats.totalUniqueVisitors}</span>
     </article>
-
 
     <div class="header-aside">
       <!-- Total clicks card -->
@@ -64,6 +63,7 @@
 <script>
   import { MoveUpRight, ChartNoAxesCombined, Users, MousePointerClick, Download } from 'lucide-svelte';
   import { stats } from '../stores/config';
+  import { setActivePath } from '../stores/navigate';
 </script>
 
 <style>
@@ -93,7 +93,7 @@
     justify-content: space-between;
     flex-grow: 1;
     min-width: fit-content;
-    border: 2px solid var(--blue-color);
+    border: 2px solid var(--gray-color);
     border-radius: 10px;
     box-shadow: 0 0 0.15em 0.15em var(--light-gray-color);
   }
@@ -145,7 +145,7 @@
     color: var(--background);
   }
 
-   .stat-redirect-icon {
+  .stat-redirect-icon {
     width: 2rem;
     height: 2rem;
     display: flex;
@@ -156,9 +156,11 @@
     color: var(--dark-gray-color);
     transition: all 0.2s;
     cursor: pointer;
+    outline: none;
+    border: none;
   }
 
-   .stat-redirect-icon:hover {
+  .stat-redirect-icon:hover {
     background-color: var(--orange-color);
     color: var(--background);
   }
