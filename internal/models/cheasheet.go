@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type Cheatsheet struct {
 	ID          string    `json:"id"`
@@ -11,4 +13,11 @@ type Cheatsheet struct {
 	ImageUrl    string    `json:"image_url"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
+}
+
+type CheatsheetMetadata struct {
+	Slug        string `json:"slug" binding:"required"`
+	Title       string `json:"title" binding:"required"`
+	Category    string `json:"category" binding:"required"`
+	SubCategory string `json:"subcategory" binding:"required"`
 }

@@ -1,9 +1,12 @@
 package api
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"mime/multipart"
 	"net/http"
+	"net/textproto"
 	"sheetdeck-studio/internal/models"
 	"time"
 )
@@ -22,6 +25,10 @@ func NewCheatsheetClient(baseURL string) *CheatsheetClient {
 	}
 }
 
+/**
+ * Get all cheat sheets
+ * @return []models.Cheatsheet, error
+ */
 func (c *CheatsheetClient) GetAllCheatsheets() ([]models.Cheatsheet, error) {
 	// Build the api URL
 	url := fmt.Sprintf("%s/cheatsheets", c.baseURL)
@@ -44,4 +51,61 @@ func (c *CheatsheetClient) GetAllCheatsheets() ([]models.Cheatsheet, error) {
 	}
 
 	return cheatsheets, nil
+}
+
+/**
+ * Upload a cheatsheet to database
+ * @param metadata models.CheatsheetMetadata
+ * @param image string
+ * @return error
+ */
+func (c *CheatsheetClient) UploadCheatsheet(metadata models.CheatsheetMetadata, image []byte) error {
+	// Build the api URL
+	url := fmt.Sprintf("%s/cheatsheets", c.baseURL)
+
+	fmt.Println("inside upload func")
+
+	/* ---- Create multipart form ---- */
+	var body bytes.Buffer
+	writer := multipart.NewWriter(&body)
+
+	// Add metadata as JSON string
+	metadataJSON, err := json.Marshal(metadata)
+	if err != nil {
+		return fmt.Errorf("failed to marshal metadata: %w", err)
+	}
+
+	if err := writer.WriteField("metadata", string(metadataJSON)); err != nil {
+		return fmt.Errorf("failed to write metadata field: %w", err)
+	}
+
+	// Add image to the form data
+	h := make(textproto.MIMEHeader)
+	h.Set("Content-Disposition", `form-data; name="cheatsheet_image"; filename="cheatsheet.webp"`)
+	h.Set("Content-Type", "image/webp")
+
+	part, err := writer.CreatePart(h)
+	if err != nil {
+		return fmt.Errorf("failed to create form file: %w", err)
+	}
+
+	if _, err := part.Write(image); err != nil {
+		return fmt.Errorf("failed to copy file content: %w", err)
+	}
+	writer.Close()
+
+	// Make the POST request
+	resp, err := c.httpClient.Post(url, writer.FormDataContentType(), &body)
+	if err != nil {
+		fmt.Println("failed to make post req")
+		return fmt.Errorf("failed to upload cheat sheet: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
+		fmt.Println("status not okay")
+		return fmt.Errorf("failed to upload cheat sheet. server returned status: %d", resp.StatusCode)
+	}
+
+	return nil
 }

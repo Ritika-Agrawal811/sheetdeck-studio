@@ -17,3 +17,7 @@ export function GetConfig() {
 export function IsMacOS() {
   return window['go']['main']['App']['IsMacOS']();
 }
+
+export function UploadCheatsheet(arg1, arg2, arg3, arg4, arg5) {
+  return window['go']['main']['App']['UploadCheatsheet'](arg1, arg2, arg3, arg4, arg5);
+}
