@@ -1,4 +1,4 @@
-export type CreateCheatsheetMetadata = {
+export type CheatsheetMetadata = {
   slug: string;
   title: string;
   category: string;

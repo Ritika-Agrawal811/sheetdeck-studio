@@ -9,3 +9,11 @@ export function GetAllCheatSheets(): Promise<Array<models.Cheatsheet>>;
 export function GetConfig(): Promise<models.ConfigResponse>;
 
 export function IsMacOS(): Promise<boolean>;
+
+export function UploadCheatsheet(
+  arg1: string,
+  arg2: string,
+  arg3: string,
+  arg4: string,
+  arg5: Array<number>
+): Promise<void>;

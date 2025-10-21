@@ -53,11 +53,24 @@ func (a *App) AuthenticateWithTouchID() (bool, error) {
 	return false, err
 }
 
-// GetAllCheatSheets retrieves all cheat sheets from the backend
+/* ---- Cheatsheet APIs ---- */
+
 func (a *App) GetAllCheatSheets() ([]models.Cheatsheet, error) {
 	return a.cheatsheetClient.GetAllCheatsheets()
 }
 
+func (a *App) UploadCheatsheet(slug, title, category, subcategory string, image []byte) error {
+	metdata := models.CheatsheetMetadata{
+		Slug:        slug,
+		Title:       title,
+		Category:    category,
+		SubCategory: subcategory,
+	}
+
+	return a.cheatsheetClient.UploadCheatsheet(metdata, image)
+}
+
+/* ---- Config APIs ---- */
 func (a *App) GetConfig() (*models.ConfigResponse, error) {
 	return a.configClient.GetConfig()
 }

@@ -23,7 +23,6 @@ function createConfigStore() {
     try {
       const apiResponse = await GetConfig();
       const data = snakeToCamel<ConfigResponse>(apiResponse);
-      console.log(data);
       set({ data, loading: false, error: null });
     } catch (error) {
       set({

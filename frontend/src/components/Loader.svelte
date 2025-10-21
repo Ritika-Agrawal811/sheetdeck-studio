@@ -1,37 +1,63 @@
-<div class="loader">
-  <div class="dot-container dot-1">
-    <span class="dot"></span>
-  </div>
-  <div class="dot-container dot-2">
-    <span class="dot"></span>
-  </div>
-  <div class="dot-container dot-3">
-    <span class="dot"></span>
-  </div>
+<div class="loader-container">
+  <div class="loader">
+    <div class="dot-container dot-1">
+      <span class="dot"></span>
+    </div>
+    <div class="dot-container dot-2">
+      <span class="dot"></span>
+    </div>
+    <div class="dot-container dot-3">
+      <span class="dot"></span>
+    </div>
 
-  <div class="dot-container dot-4">
-    <span class="dot"></span>
+    <div class="dot-container dot-4">
+      <span class="dot"></span>
+    </div>
+    <div class="dot-container dot-5">
+      <span class="dot"></span>
+    </div>
+    <div class="dot-container dot-6">
+      <span class="dot"></span>
+    </div>
+    <div class="dot-container dot-7">
+      <span class="dot"></span>
+    </div>
+    <div class="dot-container dot-8">
+      <span class="dot"></span>
+    </div>
   </div>
-  <div class="dot-container dot-5">
-    <span class="dot"></span>
-  </div>
-  <div class="dot-container dot-6">
-    <span class="dot"></span>
-  </div>
-  <div class="dot-container dot-7">
-    <span class="dot"></span>
-  </div>
-  <div class="dot-container dot-8">
-    <span class="dot"></span>
-  </div>
+  {#if label}
+    <p class="loader-label">{label}</p>
+    <p class="loader-subtitle">It will take just a few seconds.</p>
+  {/if}
 </div>
 
+<script lang="ts">
+  export let label: string | null = null;
+</script>
+
 <style>
+  .loader-container {
+    margin: 10em 0;
+  }
+
   .loader {
     position: relative;
     width: 50px;
     height: 50px;
-    margin: 10em auto;
+    margin-inline: auto;
+  }
+
+  .loader-label {
+    text-align: center;
+    font-size: 1.15rem;
+    margin-top: 2em;
+    font-weight: 700;
+  }
+
+  .loader-subtitle {
+    text-align: center;
+    margin-top: 0.5em;
   }
 
   .dot-container {
