@@ -1,4 +1,21 @@
 {#if !loading}
+  {#if showNotification}
+    {#if !errorMsg}
+      <section class="success-state">
+        <span class="icon">
+          <PartyPopper size={80} />
+        </span>
+        <p class="label">Your cheat sheet is successfully uploaded!</p>
+      </section>
+    {:else}
+      <section class="error-state">
+        <span class="icon">
+          <FileX2 size={75} />
+        </span>
+        <p class="label">Failed to upload your cheat sheet. Try again.</p>
+      </section>
+    {/if}
+  {/if}
   <form on:submit|preventDefault={handleSubmit}>
     <section class="upload-cheatsheet-form">
       <Input label="Title" id="sheet-title" bind:value={title} />
@@ -25,7 +42,7 @@
       <!-- Upload and Reset buttons -->
       <div class="btn-group">
         <Button type="submit" size="big">Upload</Button>
-        <Button type="reset" variant="default" size="big">Reset</Button>
+        <Button type="button" variant="default" size="big" on:click={handleReset}>Reset</Button>
       </div>
     </section>
 
@@ -43,6 +60,7 @@
   import Loader from '../../common/Loader.svelte';
   import UploadImageSection from './UploadImageSection.svelte';
 
+  import { PartyPopper, FileX2 } from 'lucide-svelte';
   import { categories, subcategories } from '../../../stores/config';
   import type { CheatsheetMetadata } from '../../../types/cheatsheet';
   import { UploadCheatsheet } from '../../../../wailsjs/go/main/App';
@@ -64,6 +82,7 @@
   /* ---- Loading states ---- */
   let loading = false;
   let errorMsg: string | null = null;
+  let showNotification = false;
 
   /* ---- Set cheat sheet metadata and slug ---- */
   $: metadata = { title, slug, category, subcategory };
@@ -94,7 +113,26 @@
       errorMsg = err;
     } finally {
       loading = false;
+      showNotification = true;
+
+      // Hide notification after 3 seconds
+      setTimeout(() => {
+        showNotification = false;
+        errorMsg = '';
+      }, 1000);
+
+      handleReset();
     }
+  };
+
+  /**
+   * Handle form reset
+   */
+  const handleReset = () => {
+    title = '';
+    category = '';
+    subcategory = '';
+    selectedFile = null;
   };
 </script>
 
@@ -138,5 +176,34 @@
   .btn-group {
     display: flex;
     gap: 1.5em;
+  }
+
+  /* ---- error ans success states ---- */
+  .error-state,
+  .success-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 3rem);
+    padding: 10em 0;
+    background-color: var(--background);
+    z-index: 5;
+  }
+
+  .success-state .icon {
+    color: var(--green-color);
+  }
+
+  .error-state .icon {
+    color: var(--red-color);
+  }
+
+  .error-state .label,
+  .success-state .label {
+    font-size: 1.05rem;
+    font-weight: 700;
   }
 </style>
