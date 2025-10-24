@@ -57,6 +57,10 @@
   let fileInput: HTMLInputElement;
   let previewUrl: string | null = null;
 
+  $: if (!selectedFile) {
+    handleRemoveSelectedFile();
+  }
+
   /**
    * Trigger file input to open upload dialog
    * @param e
