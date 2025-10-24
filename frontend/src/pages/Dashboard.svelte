@@ -11,7 +11,7 @@
   import Cheatsheet from './Cheatsheet.svelte';
   import Analytics from './Analytics.svelte';
   import UploadCheatsheet from './UploadCheatsheet.svelte';
-  import Sidebar from '../components/Sidebar.svelte';
+  import Sidebar from '../components/layout/Sidebar.svelte';
 
   /* Types */
   import type { ComponentType } from 'svelte';

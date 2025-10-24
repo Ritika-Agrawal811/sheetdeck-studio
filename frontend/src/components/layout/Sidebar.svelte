@@ -41,11 +41,11 @@
 
 <script lang="ts">
   import { ImageUp, ChevronLeft, ChevronRight, House, FileText, ChartNoAxesCombined } from 'lucide-svelte';
-  import Button from '../components/Button.svelte';
+  import Button from '../common/Button.svelte';
   import type { ComponentType } from 'svelte';
 
-  import { activePath, setActivePath } from '../stores/navigate';
-  import type { Paths } from '../stores/navigate';
+  import { activePath, setActivePath } from '../../stores/navigate';
+  import type { Paths } from '../../stores/navigate';
 
   /* ---- Toggle sidebar width ---- */
   let isMinimized = false;

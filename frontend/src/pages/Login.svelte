@@ -22,8 +22,8 @@
 </section>
 
 <script lang="ts">
-  import Input from '../components/Input.svelte';
-  import Button from '../components/Button.svelte';
+  import Input from '../components/common/Input.svelte';
+  import Button from '../components/common/Button.svelte';
   import { Fingerprint, LogIn } from 'lucide-svelte';
 
   import { AuthenticateWithTouchID, IsMacOS } from '../../wailsjs/go/main/App';
