@@ -24,7 +24,7 @@
   }
 
   // components
-  import Header from './components/Header.svelte';
+  import Header from './components/layout/Header.svelte';
   import Login from './pages/Login.svelte';
   import Dashboard from './pages/Dashboard.svelte';
 </script>

@@ -5,19 +5,20 @@
     </figure>
 
     {#if $isAuthenticated}
-      <Button type="button" variant="fill" size="small" icon={true} on:click={logout}
-        ><LogOut size={20} /> Logout</Button
-      >
+      <Button type="button" variant="fill" size="small" icon={true} on:click={logout}>
+        <LogOut size={20} />
+        Logout
+      </Button>
     {/if}
   </nav>
 </header>
 
 <script>
-  import logo from '../assets/images/logo.png';
+  import logo from '../../assets/images/logo.png';
 
-  import { isAuthenticated, logout } from '../stores/auth';
+  import { isAuthenticated, logout } from '../../stores/auth';
   import { LogOut } from 'lucide-svelte';
-  import Button from './Button.svelte';
+  import Button from '../common/Button.svelte';
 </script>
 
 <style>

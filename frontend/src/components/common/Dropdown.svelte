@@ -8,7 +8,7 @@
       id={`${name}-dropdown-button`}
       on:click={toggleDropdown}
     >
-      <span class="selected-label">{removeSnakeCase(selectedValue)}</span>
+      <span class="selected-label">{removeSnakeCase(value)}</span>
       <span class="arrow" class:rotated={isOpen}></span>
     </button>
 
@@ -32,8 +32,8 @@
 </div>
 
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte';
-  import { removeSnakeCase } from '../utils/caseConverter';
+  import { onMount } from 'svelte';
+  import { removeSnakeCase } from '../../utils/caseConverter';
 
   export let list: string[] = [];
   export let id: string = '';
@@ -42,12 +42,9 @@
   export let value: string = '';
 
   let isOpen = false;
-  let selectedValue = value || list[0] || '';
 
-  const dispatch = createEventDispatcher();
-
-  $: if (value) {
-    selectedValue = value;
+  $: if (!value && list.length > 0) {
+    value = list[0];
   }
 
   onMount(() => {
@@ -63,8 +60,6 @@
   const selectItem = (item: string) => {
     value = item;
     isOpen = false;
-
-    dispatch('change', value);
   };
 </script>
 
