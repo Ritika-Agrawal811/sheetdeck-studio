@@ -5,10 +5,14 @@
     </figure>
 
     {#if $isAuthenticated}
-      <Button type="button" variant="fill" size="small" icon={true} on:click={logout}>
-        <LogOut size={20} />
-        Logout
-      </Button>
+      <div class="nav-end">
+        <Searchbar />
+        <DarkModeToggle />
+        <Button type="button" variant="fill" size="small" icon={true} on:click={logout}>
+          <LogOut size={20} />
+          Logout
+        </Button>
+      </div>
     {/if}
   </nav>
 </header>
@@ -19,6 +23,8 @@
   import { isAuthenticated, logout } from '../../stores/auth';
   import { LogOut } from 'lucide-svelte';
   import Button from '../common/Button.svelte';
+  import DarkModeToggle from './DarkModeToggle.svelte';
+  import Searchbar from './Searchbar.svelte';
 </script>
 
 <style>
@@ -36,5 +42,11 @@
     width: auto;
     height: 100%;
     object-fit: contain;
+  }
+
+  .nav-end {
+    display: flex;
+    gap: 1em;
+    align-items: center;
   }
 </style>
