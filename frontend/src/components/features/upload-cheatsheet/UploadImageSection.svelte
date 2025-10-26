@@ -137,7 +137,7 @@
   }
 
   .image-preview {
-    width: 95%;
+    width: 90%;
     max-width: 600px;
     height: min(50vh, 800px);
     padding: 0.5em;

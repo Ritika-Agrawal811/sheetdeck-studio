@@ -63,8 +63,6 @@ func (c *CheatsheetClient) UploadCheatsheet(metadata models.CheatsheetMetadata, 
 	// Build the api URL
 	url := fmt.Sprintf("%s/cheatsheets", c.baseURL)
 
-	fmt.Println("inside upload func")
-
 	/* ---- Create multipart form ---- */
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
@@ -97,13 +95,11 @@ func (c *CheatsheetClient) UploadCheatsheet(metadata models.CheatsheetMetadata, 
 	// Make the POST request
 	resp, err := c.httpClient.Post(url, writer.FormDataContentType(), &body)
 	if err != nil {
-		fmt.Println("failed to make post req")
 		return fmt.Errorf("failed to upload cheat sheet: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-		fmt.Println("status not okay")
 		return fmt.Errorf("failed to upload cheat sheet. server returned status: %d", resp.StatusCode)
 	}
 

@@ -41,6 +41,6 @@
   /* ---- container ---- */
   .container {
     flex-grow: 1;
-    padding: 2em 2.5em;
+    padding: 1.5em 2em;
   }
 </style>
