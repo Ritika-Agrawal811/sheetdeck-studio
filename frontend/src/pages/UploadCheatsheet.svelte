@@ -1,6 +1,6 @@
 <section class="upload-cheatsheet-section">
-  <h2>Upload Cheatsheets</h2>
-  {#if $configStore.loading}
+  <h2 class="heading">Upload Cheatsheets</h2>
+  {#if $configStore.loading && !$configStore.data}
     <Loader />
   {:else if $configStore.data}
     <UploadCheatsheetForm />
@@ -17,10 +17,5 @@
 <style>
   .upload-cheatsheet-section {
     position: relative;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1em;
   }
 </style>

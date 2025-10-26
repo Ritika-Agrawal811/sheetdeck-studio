@@ -1,5 +1,5 @@
 <section>
-  <h2>Overview</h2>
+  <h2 class="heading">Overview</h2>
   <header class="stat-cards-container">
     <!-- Total cheat sheets card -->
     <StatCard label="Total Cheat sheets" variant="fill" redirect="cheatsheet" value={$stats.totalCheatsheets} />
@@ -28,11 +28,6 @@
 </script>
 
 <style>
-  h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1em;
-  }
-
   .stat-cards-container {
     display: flex;
     gap: 1em;

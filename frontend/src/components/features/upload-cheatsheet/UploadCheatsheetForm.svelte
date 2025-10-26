@@ -61,7 +61,7 @@
   import UploadImageSection from './UploadImageSection.svelte';
 
   import { PartyPopper, FileX2 } from 'lucide-svelte';
-  import { categories, subcategories } from '../../../stores/config';
+  import { categories, configStore, subcategories } from '../../../stores/config';
   import type { CheatsheetMetadata } from '../../../types/cheatsheet';
   import { UploadCheatsheet } from '../../../../wailsjs/go/main/App';
 
@@ -122,6 +122,9 @@
       }, 1000);
 
       handleReset();
+
+      /* reload config after uploading */
+      await configStore.load();
     }
   };
 
@@ -140,7 +143,7 @@
   form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 6em;
+    gap: 4em;
   }
 
   .upload-cheatsheet-form {

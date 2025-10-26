@@ -71,7 +71,7 @@
 
 <style>
   aside {
-    width: 300px;
+    width: 250px;
     height: 100%;
     background-color: var(--gray-color);
     border-radius: 0 3em 0 0;

@@ -1,5 +1,7 @@
 <div class="select-container">
-  <label for={id}>{label}</label>
+  {#if label}
+    <label for={id}>{label}</label>
+  {/if}
 
   <div class="custom-select">
     <button
@@ -38,7 +40,7 @@
   export let list: string[] = [];
   export let id: string = '';
   export let name: string = '';
-  export let label: string = '';
+  export let label: string | null = null;
   export let value: string = '';
 
   let isOpen = false;

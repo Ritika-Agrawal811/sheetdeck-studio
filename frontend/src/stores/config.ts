@@ -2,7 +2,7 @@ import { writable, derived, type Readable } from 'svelte/store';
 import { GetConfig } from '../../wailsjs/go/main/App';
 import { snakeToCamel } from '../utils/caseConverter';
 
-import type { ConfigResponse, GlobalStats } from '../types/config';
+import type { CategoryStat, ConfigResponse, GlobalStats } from '../types/config';
 
 interface ConfigState {
   data: ConfigResponse | null;
@@ -60,4 +60,9 @@ export const stats: Readable<GlobalStats> = derived(
       totalClicks: 0,
       totalDownloads: 0,
     }
+);
+
+export const categoryStats: Readable<CategoryStat[]> = derived(
+  configStore,
+  ($store) => $store.data?.categoryStats ?? []
 );
