@@ -4,7 +4,7 @@ import { models } from '../models';
 
 export function AuthenticateWithTouchID(): Promise<boolean>;
 
-export function GetAllCheatSheets(): Promise<Array<models.Cheatsheet>>;
+export function GetCheatSheets(arg1: string, arg2: string): Promise<Array<models.Cheatsheet>>;
 
 export function GetConfig(): Promise<models.ConfigResponse>;
 

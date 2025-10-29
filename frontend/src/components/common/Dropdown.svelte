@@ -1,8 +1,8 @@
-<div class="select-container">
+<div class="select-container {variant} {size}">
   {#if label}
     <label for={id}>{label}</label>
   {/if}
-
+  <Backdrop onClick={closeDropdown} show={isOpen} />
   <div class="custom-select">
     <button
       type="button"
@@ -36,12 +36,15 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { removeSnakeCase } from '../../utils/caseConverter';
+  import Backdrop from './Backdrop.svelte';
 
   export let list: string[] = [];
   export let id: string = '';
   export let name: string = '';
   export let label: string | null = null;
   export let value: string = '';
+  export let variant: 'pill' | 'rounded' = 'rounded';
+  export let size: 'default' | 'small' = 'default';
 
   let isOpen = false;
 
@@ -57,6 +60,10 @@
 
   const toggleDropdown = () => {
     isOpen = !isOpen;
+  };
+
+  const closeDropdown = () => {
+    isOpen = false;
   };
 
   const selectItem = (item: string) => {
@@ -88,7 +95,6 @@
     padding: 0.75rem 1.05rem;
     font-size: 1.15rem;
     border: 2px solid var(--blue-color);
-    border-radius: 10px;
     background-color: transparent;
     transition: border-color 0.2s;
     cursor: pointer;
@@ -148,5 +154,25 @@
     background-color: var(--blue-color);
     color: white;
     font-weight: 500;
+  }
+
+  /* ---- variant classes ---- */
+  .select-container.rounded .select-display {
+    border-radius: 10px;
+  }
+
+  .select-container.pill .select-display {
+    border-radius: 100vmax;
+  }
+
+  /* ---- size classes ---- */
+  .select-container.default .select-display {
+    padding: 0.75rem 1.05rem;
+    font-size: 1.15rem;
+  }
+
+  .select-container.small .select-display {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
   }
 </style>

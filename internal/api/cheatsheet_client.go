@@ -29,9 +29,9 @@ func NewCheatsheetClient(baseURL string) *CheatsheetClient {
  * Get all cheat sheets
  * @return []models.Cheatsheet, error
  */
-func (c *CheatsheetClient) GetAllCheatsheets() ([]models.Cheatsheet, error) {
+func (c *CheatsheetClient) GetCheatsheets(category string, subcategory string) ([]models.Cheatsheet, error) {
 	// Build the api URL
-	url := fmt.Sprintf("%s/cheatsheets", c.baseURL)
+	url := fmt.Sprintf("%s/cheatsheets?category=%s&subcategory=%s", c.baseURL, category, subcategory)
 
 	// Make the GET repquest
 	resp, err := c.httpClient.Get(url)
@@ -45,12 +45,12 @@ func (c *CheatsheetClient) GetAllCheatsheets() ([]models.Cheatsheet, error) {
 	}
 
 	// Decode the JSON response
-	var cheatsheets []models.Cheatsheet
+	var cheatsheets models.CheatsheetResponse
 	if err := json.NewDecoder(resp.Body).Decode(&cheatsheets); err != nil {
 		return nil, fmt.Errorf("failed to decode cheat sheets response: %w", err)
 	}
 
-	return cheatsheets, nil
+	return cheatsheets.Data, nil
 }
 
 /**

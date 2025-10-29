@@ -26,8 +26,8 @@
   import { categoryStats, stats } from '../../../stores/config';
   import { categoryStatsToArcChartData, subcategoryStatstoArcChartData } from '../../../utils/prepareChartData';
 
-  let activeCategory: string = $categoryStats[1].category;
-  let activeSubcategory: string | null = null;
+  export let activeCategory: string | null = null;
+  export let activeSubcategory: string | null = null;
 
   let subcategoriesData: ArcChartData[] = [];
 
@@ -50,3 +50,18 @@
     activeSubcategory = subcategory;
   };
 </script>
+
+<style>
+  .categories-group {
+    width: 315px;
+    height: 100%;
+    border-radius: 15px;
+    padding: 1em;
+    background-color: var(--light-gray-color);
+    border: 1px solid var(--gray-color);
+  }
+
+  .subcategories-section {
+    margin-top: 2em;
+  }
+</style>

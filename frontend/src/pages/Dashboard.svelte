@@ -35,12 +35,12 @@
   .dashboard {
     height: calc(100vh - 5.625em);
     padding-top: 1em;
-    display: flex;
+    display: grid;
+    grid-template-columns: 250px 1fr;
   }
 
   /* ---- container ---- */
   .container {
-    flex-grow: 1;
-    padding: 1.5em 2em;
+    padding: 1.5em;
   }
 </style>

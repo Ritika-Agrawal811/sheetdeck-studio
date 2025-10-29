@@ -31,7 +31,7 @@
   export let label: string = '';
   export let count: number = 0;
 
-  const innerRadius = 110;
+  const innerRadius = 105;
   const outerRadius = 140;
   const spring = { stiffness: 0.3, damping: 0.8 };
 
