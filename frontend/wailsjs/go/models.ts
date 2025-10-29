@@ -50,16 +50,14 @@ export namespace models {
     }
   }
   export class Cheatsheet {
-    id: string;
+    id: pgtype.UUID;
     slug: string;
     title: string;
     category: string;
     subcategory: string;
-    image_url: string;
-    // Go type: time
-    created_at: any;
-    // Go type: time
-    updated_at: any;
+    image_url: pgtype.Text;
+    created_at: pgtype.Timestamptz;
+    updated_at: pgtype.Timestamptz;
 
     static createFrom(source: any = {}) {
       return new Cheatsheet(source);
@@ -67,14 +65,14 @@ export namespace models {
 
     constructor(source: any = {}) {
       if ('string' === typeof source) source = JSON.parse(source);
-      this.id = source['id'];
+      this.id = this.convertValues(source['id'], pgtype.UUID);
       this.slug = source['slug'];
       this.title = source['title'];
       this.category = source['category'];
       this.subcategory = source['subcategory'];
-      this.image_url = source['image_url'];
-      this.created_at = this.convertValues(source['created_at'], null);
-      this.updated_at = this.convertValues(source['updated_at'], null);
+      this.image_url = this.convertValues(source['image_url'], pgtype.Text);
+      this.created_at = this.convertValues(source['created_at'], pgtype.Timestamptz);
+      this.updated_at = this.convertValues(source['updated_at'], pgtype.Timestamptz);
     }
 
     convertValues(a: any, classs: any, asMap: boolean = false): any {
@@ -149,6 +147,72 @@ export namespace models {
         return new classs(a);
       }
       return a;
+    }
+  }
+}
+
+export namespace pgtype {
+  export class Text {
+    String: string;
+    Valid: boolean;
+
+    static createFrom(source: any = {}) {
+      return new Text(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.String = source['String'];
+      this.Valid = source['Valid'];
+    }
+  }
+  export class Timestamptz {
+    // Go type: time
+    Time: any;
+    InfinityModifier: number;
+    Valid: boolean;
+
+    static createFrom(source: any = {}) {
+      return new Timestamptz(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.Time = this.convertValues(source['Time'], null);
+      this.InfinityModifier = source['InfinityModifier'];
+      this.Valid = source['Valid'];
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
+  export class UUID {
+    Bytes: number[];
+    Valid: boolean;
+
+    static createFrom(source: any = {}) {
+      return new UUID(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.Bytes = source['Bytes'];
+      this.Valid = source['Valid'];
     }
   }
 }

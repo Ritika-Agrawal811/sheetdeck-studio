@@ -6,8 +6,8 @@ export function AuthenticateWithTouchID() {
   return window['go']['main']['App']['AuthenticateWithTouchID']();
 }
 
-export function GetAllCheatSheets() {
-  return window['go']['main']['App']['GetAllCheatSheets']();
+export function GetCheatSheets(arg1, arg2) {
+  return window['go']['main']['App']['GetCheatSheets'](arg1, arg2);
 }
 
 export function GetConfig() {

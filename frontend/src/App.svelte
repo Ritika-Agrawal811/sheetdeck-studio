@@ -1,16 +1,30 @@
-<main>
-  <Header />
-  {#if $isAuthenticated}
-    <Dashboard />
-  {:else}
-    <Login />
-  {/if}
-</main>
+<QueryClientProvider client={queryClient}>
+  <main>
+    <Header />
+    {#if $isAuthenticated}
+      <Dashboard />
+    {:else}
+      <Login />
+    {/if}
+  </main>
+</QueryClientProvider>
 
 <script>
   import { onMount } from 'svelte';
   import { isAuthenticated } from './stores/auth';
   import { configStore } from './stores/config';
+
+  import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+        refetchOnWindowFocus: false,
+        retry: 3,
+      },
+    },
+  });
 
   onMount(async () => {
     if ($isAuthenticated) {
