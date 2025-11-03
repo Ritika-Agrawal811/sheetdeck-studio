@@ -14,6 +14,14 @@ export function GetConfig() {
   return window['go']['main']['App']['GetConfig']();
 }
 
+export function GetDevicesStats(arg1) {
+  return window['go']['main']['App']['GetDevicesStats'](arg1);
+}
+
+export function GetPageviewStats(arg1) {
+  return window['go']['main']['App']['GetPageviewStats'](arg1);
+}
+
 export function IsMacOS() {
   return window['go']['main']['App']['IsMacOS']();
 }

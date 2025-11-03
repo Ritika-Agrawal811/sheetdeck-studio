@@ -8,6 +8,10 @@ export function GetCheatSheets(arg1: string, arg2: string): Promise<Array<models
 
 export function GetConfig(): Promise<models.ConfigResponse>;
 
+export function GetDevicesStats(arg1: string): Promise<models.DeviceStatsResponse>;
+
+export function GetPageviewStats(arg1: string): Promise<models.PageviewStatsResponse>;
+
 export function IsMacOS(): Promise<boolean>;
 
 export function UploadCheatsheet(

@@ -15,6 +15,7 @@ type App struct {
 	ctx              context.Context
 	cheatsheetClient *api.CheatsheetClient
 	configClient     *api.ConfigClent
+	analyticsClient  *api.AnalyticsClient
 	baseURL          string
 	isMacOS          bool
 }
@@ -25,6 +26,7 @@ func NewApp(baseURL string) *App {
 		baseURL:          baseURL,
 		cheatsheetClient: api.NewCheatsheetClient(baseURL),
 		configClient:     api.NewConfigClient(baseURL),
+		analyticsClient:  api.NewAnalyticsClient(baseURL),
 		isMacOS:          runtime.GOOS == "darwin",
 	}
 }
@@ -68,6 +70,15 @@ func (a *App) UploadCheatsheet(slug, title, category, subcategory string, image 
 	}
 
 	return a.cheatsheetClient.UploadCheatsheet(metdata, image)
+}
+
+/* ---- Analytics APIs ---- */
+func (a *App) GetPageviewStats(period string) (*models.PageviewStatsResponse, error) {
+	return a.analyticsClient.GetPageviewsStats(period)
+}
+
+func (a *App) GetDevicesStats(period string) (*models.DeviceStatsResponse, error) {
+	return a.analyticsClient.GetDevicesStats(period)
 }
 
 /* ---- Config APIs ---- */

@@ -13,6 +13,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "@tsconfig/svelte": "^5.0.5",
+    "@types/d3-scale": "^4.0.9",
     "@typescript-eslint/parser": "^8.46.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.6.2",
@@ -24,6 +25,9 @@
   },
   "dependencies": {
     "@tanstack/svelte-query": "^5.90.2",
+    "chart.js": "^4.5.1",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "d3-scale": "^4.0.2",
     "highlight.js": "^11.11.1",
     "lucide-svelte": "^0.545.0",
     "svelte-icons": "^2.1.0"
