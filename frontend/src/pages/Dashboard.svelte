@@ -1,5 +1,5 @@
-<section class="dashboard">
-  <Sidebar />
+<section class="dashboard" class:minimize={isMinimized}>
+  <Sidebar bind:isMinimized />
   <main class="container">
     <svelte:component this={pages[$activePath]} />
   </main>
@@ -29,6 +29,8 @@
     analytics: Analytics,
     upload: UploadCheatsheet,
   };
+
+  let isMinimized = false;
 </script>
 
 <style>
@@ -37,6 +39,11 @@
     padding-top: 1em;
     display: grid;
     grid-template-columns: 250px 1fr;
+    transition: all 0.5s;
+  }
+
+  .dashboard.minimize {
+    grid-template-columns: 100px 1fr;
   }
 
   /* ---- container ---- */

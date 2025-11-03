@@ -104,7 +104,7 @@
   const processFile = (file: File | undefined) => {
     if (!file) return;
 
-    if (file.type !== 'image/webp') {
+    if (file.type !== 'image/webp' && file.type !== 'image/gif') {
       return;
     }
 

@@ -27,13 +27,13 @@
 </section>
 
 <script lang="ts">
+  import Loader from '../components/common/Loader.svelte';
   import Dropdown from '../components/common/Dropdown.svelte';
   import CategoriesGroup from '../components/features/cheatsheet-display/CategoriesGroup.svelte';
+  import Grid from '../components/features/cheatsheet-display/Grid.svelte';
 
   import { Grid2x2, TableOfContents } from 'lucide-svelte';
   import { getCheatSheets } from '../queries/cheatsheets';
-  import Loader from '../components/common/Loader.svelte';
-  import Grid from '../components/features/cheatsheet-display/Grid.svelte';
 
   /* ---- filter dropdown ---- */
   const filters = [

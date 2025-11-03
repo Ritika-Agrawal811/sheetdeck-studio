@@ -1,4 +1,4 @@
-<ul class="list {variant}">
+<ul role="tablist" class="list {variant}">
   {#each data as item}
     <li
       role="tab"

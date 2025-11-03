@@ -149,6 +149,169 @@ export namespace models {
       return a;
     }
   }
+  export class DeviceStat {
+    // Go type: time
+    date: any;
+    mobile_views: number;
+    mobile_visitors: number;
+    desktop_views: number;
+    desktop_visitors: number;
+
+    static createFrom(source: any = {}) {
+      return new DeviceStat(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.date = this.convertValues(source['date'], null);
+      this.mobile_views = source['mobile_views'];
+      this.mobile_visitors = source['mobile_visitors'];
+      this.desktop_views = source['desktop_views'];
+      this.desktop_visitors = source['desktop_visitors'];
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
+  export class DeviceStatsResponse {
+    period: string;
+    // Go type: time
+    start_date: any;
+    // Go type: time
+    end_date: any;
+    total_mobile_views: number;
+    total_mobile_visitors: number;
+    total_desktop_views: number;
+    total_desktop_visitors: number;
+    intervals: DeviceStat[];
+
+    static createFrom(source: any = {}) {
+      return new DeviceStatsResponse(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.period = source['period'];
+      this.start_date = this.convertValues(source['start_date'], null);
+      this.end_date = this.convertValues(source['end_date'], null);
+      this.total_mobile_views = source['total_mobile_views'];
+      this.total_mobile_visitors = source['total_mobile_visitors'];
+      this.total_desktop_views = source['total_desktop_views'];
+      this.total_desktop_visitors = source['total_desktop_visitors'];
+      this.intervals = this.convertValues(source['intervals'], DeviceStat);
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
+
+  export class PageviewStat {
+    // Go type: time
+    date: any;
+    views: number;
+    visitors: number;
+
+    static createFrom(source: any = {}) {
+      return new PageviewStat(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.date = this.convertValues(source['date'], null);
+      this.views = source['views'];
+      this.visitors = source['visitors'];
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
+  export class PageviewStatsResponse {
+    period: string;
+    // Go type: time
+    start_date: any;
+    // Go type: time
+    end_date: any;
+    total_views: number;
+    total_unique_visitors: number;
+    intervals: PageviewStat[];
+
+    static createFrom(source: any = {}) {
+      return new PageviewStatsResponse(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.period = source['period'];
+      this.start_date = this.convertValues(source['start_date'], null);
+      this.end_date = this.convertValues(source['end_date'], null);
+      this.total_views = source['total_views'];
+      this.total_unique_visitors = source['total_unique_visitors'];
+      this.intervals = this.convertValues(source['intervals'], PageviewStat);
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
 }
 
 export namespace pgtype {

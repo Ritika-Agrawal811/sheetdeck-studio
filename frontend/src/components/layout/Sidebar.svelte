@@ -48,7 +48,7 @@
   import type { Paths } from '../../stores/navigate';
 
   /* ---- Toggle sidebar width ---- */
-  let isMinimized = false;
+  export let isMinimized = false;
 
   const toggleSidebar = () => {
     console.log('clicked');

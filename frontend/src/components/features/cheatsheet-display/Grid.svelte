@@ -21,7 +21,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5em;
-    height: 630px;
+    height: 620px;
     overflow-y: scroll;
   }
 
@@ -46,7 +46,7 @@
     height: 230px;
     width: 85%;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px var(--gray-color));
+    filter: drop-shadow(0 0 5px var(--gray-color));
   }
 
   h4 {
