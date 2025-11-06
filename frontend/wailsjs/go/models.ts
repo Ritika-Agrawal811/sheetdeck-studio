@@ -312,6 +312,61 @@ export namespace models {
       return a;
     }
   }
+  export class ResourceUsage {
+    size_bytes: number;
+    size_pretty: string;
+    limit_bytes: number;
+    limit_pretty: string;
+    usage_percent: number;
+
+    static createFrom(source: any = {}) {
+      return new ResourceUsage(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.size_bytes = source['size_bytes'];
+      this.size_pretty = source['size_pretty'];
+      this.limit_bytes = source['limit_bytes'];
+      this.limit_pretty = source['limit_pretty'];
+      this.usage_percent = source['usage_percent'];
+    }
+  }
+
+  export class UsageResponse {
+    database: ResourceUsage;
+    storage: ResourceUsage;
+    timestamp: string;
+
+    static createFrom(source: any = {}) {
+      return new UsageResponse(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.database = this.convertValues(source['database'], ResourceUsage);
+      this.storage = this.convertValues(source['storage'], ResourceUsage);
+      this.timestamp = source['timestamp'];
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
 }
 
 export namespace pgtype {

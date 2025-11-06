@@ -37,10 +37,13 @@
       {/each}
     </ul>
   </nav>
+
+  <StorageUsage bind:isMinimized />
 </aside>
 
 <script lang="ts">
   import { ImageUp, ChevronLeft, ChevronRight, House, FileText, ChartNoAxesCombined } from 'lucide-svelte';
+  import StorageUsage from '../features/stats/StorageUsage.svelte';
   import Button from '../common/Button.svelte';
   import type { ComponentType } from 'svelte';
 
@@ -77,6 +80,8 @@
     border-radius: 0 3em 0 0;
     padding: 2em 0;
     transition: width 0.5s;
+    display: flex;
+    flex-direction: column;
   }
 
   aside.minimize {

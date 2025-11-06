@@ -12,6 +12,8 @@ export function GetDevicesStats(arg1: string): Promise<models.DeviceStatsRespons
 
 export function GetPageviewStats(arg1: string): Promise<models.PageviewStatsResponse>;
 
+export function GetStorageUsage(): Promise<models.UsageResponse>;
+
 export function IsMacOS(): Promise<boolean>;
 
 export function UploadCheatsheet(

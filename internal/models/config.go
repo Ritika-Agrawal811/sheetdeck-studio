@@ -26,3 +26,17 @@ type GlobalStats struct {
 	TotalClicks         int64 `json:"total_clicks"`
 	TotalDownloads      int64 `json:"total_downloads"`
 }
+
+type UsageResponse struct {
+	Database  ResourceUsage `json:"database"`
+	Storage   ResourceUsage `json:"storage"`
+	Timestamp string        `json:"timestamp"`
+}
+
+type ResourceUsage struct {
+	SizeBytes    int64   `json:"size_bytes"`
+	SizePretty   string  `json:"size_pretty"`
+	LimitBytes   int64   `json:"limit_bytes"`
+	LimitPretty  string  `json:"limit_pretty"`
+	UsagePercent float64 `json:"usage_percent"`
+}

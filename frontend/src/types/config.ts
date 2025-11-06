@@ -24,3 +24,15 @@ export type GlobalStats = {
   totalClicks: number;
   totalDownloads: number;
 };
+
+export type StorageDetails = {
+  database: Usage;
+  storage: Usage;
+  timestamp: string;
+};
+
+type Usage = {
+  limitPretty: string;
+  sizePretty: string;
+  usagePercent: number;
+};
