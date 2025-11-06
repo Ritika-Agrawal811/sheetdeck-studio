@@ -22,6 +22,10 @@ export function GetPageviewStats(arg1) {
   return window['go']['main']['App']['GetPageviewStats'](arg1);
 }
 
+export function GetStorageUsage() {
+  return window['go']['main']['App']['GetStorageUsage']();
+}
+
 export function IsMacOS() {
   return window['go']['main']['App']['IsMacOS']();
 }

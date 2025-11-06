@@ -2,7 +2,7 @@
   <!-- Categories Section -->
   <div>
     <h3 class="sub-heading">Categories</h3>
-    <Arc data={categoriesData} label="Cheat Sheets" count={$stats.totalCheatsheets} />
+    <Arc data={categoriesData} label="Cheat Sheets" count={totalCheatsheets} />
     <TabList data={categoriesData} variant="fill" bind:activeItem={activeCategory} setActiveItem={setActiveCategory} />
   </div>
 
@@ -22,23 +22,25 @@
   import TabList from '../../common/TabList.svelte';
   import Arc from '../charts/Arc.svelte';
 
-  import type { ArcChartData } from '../../../types/chart';
-  import { categoryStats, stats } from '../../../stores/config';
   import { categoryStatsToArcChartData, subcategoryStatstoArcChartData } from '../../../utils/prepareChartData';
+  import { getConfig } from '../../../queries/config';
 
   export let activeCategory: string | null = null;
   export let activeSubcategory: string | null = null;
 
-  let subcategoriesData: ArcChartData[] = [];
+  $: configData = getConfig();
 
-  $: categoriesData = categoryStatsToArcChartData($categoryStats);
-  $: subcategories = $categoryStats.find((item) => item.category == activeCategory)?.subcategoriesStats;
+  $: totalCheatsheets = $configData.data?.stats.totalCheatsheets ?? 0;
+  $: categoriesStats = $configData.data?.categoryStats ?? [];
+  $: categoriesData = categoryStatsToArcChartData(categoriesStats);
+
+  $: subcategories = categoriesStats.find((item) => item.category == activeCategory)?.subcategoriesStats;
+  $: subcategoriesData = subcategories ? subcategoryStatstoArcChartData(subcategories) : [];
 
   /**
    * Set active sub category and prepare sub cateogies data for the TabList component
    */
-  $: if (subcategories) {
-    subcategoriesData = subcategoryStatstoArcChartData(subcategories);
+  $: if (subcategories?.[0]) {
     activeSubcategory = subcategories[0].subcategory;
   }
 

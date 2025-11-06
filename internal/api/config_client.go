@@ -23,6 +23,10 @@ func NewConfigClient(baseURL string) *ConfigClent {
 
 }
 
+/**
+ * Get config data - categories, subcategories etc.
+ * @return *models.ConfigResponse, error
+ */
 func (c *ConfigClent) GetConfig() (*models.ConfigResponse, error) {
 	// Build the api URL
 	url := fmt.Sprintf("%s/config", c.baseURL)
@@ -45,4 +49,32 @@ func (c *ConfigClent) GetConfig() (*models.ConfigResponse, error) {
 	}
 
 	return config, nil
+}
+
+/**
+ * Get storage usage data
+ * @return *models.UsageResponse, error
+ */
+func (c *ConfigClent) GetStorageUsage() (*models.UsageResponse, error) {
+	// Build the api URL
+	url := fmt.Sprintf("%s/config/usage", c.baseURL)
+
+	// Make the GET request
+	resp, err := c.httpClient.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch storage usage for backend: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to fetch storage usage. server returned status: %d", resp.StatusCode)
+	}
+
+	// Decode the JSON response
+	var usage *models.UsageResponse
+	if err := json.NewDecoder(resp.Body).Decode(&usage); err != nil {
+		return nil, fmt.Errorf("failed to decode the storage usage response: %w", err)
+	}
+
+	return usage, nil
 }

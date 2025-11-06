@@ -85,3 +85,7 @@ func (a *App) GetDevicesStats(period string) (*models.DeviceStatsResponse, error
 func (a *App) GetConfig() (*models.ConfigResponse, error) {
 	return a.configClient.GetConfig()
 }
+
+func (a *App) GetStorageUsage() (*models.UsageResponse, error) {
+	return a.configClient.GetStorageUsage()
+}
