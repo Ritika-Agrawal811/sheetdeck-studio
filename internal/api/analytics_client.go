@@ -75,3 +75,30 @@ func (c *AnalyticsClient) GetDevicesStats(period string) (*models.DeviceStatsRes
 
 	return stats, nil
 }
+
+/**
+ * Get browsers stats by period - 24h, 7d, 30d, 3m etc
+ * @return *models.BrowserStatsResponse, error
+ */
+func (c *AnalyticsClient) GetBrowsersStats(period string) (*models.BrowserStatsResponse, error) {
+	// Build the api URL
+	url := fmt.Sprintf("%s/analytics/summary/browsers?period=%s", c.baseURL, period)
+
+	// Make the GET response
+	resp, err := c.httpClient.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("faield to fetch browsers stats: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to browsers stats. server returned status: %d", resp.StatusCode)
+	}
+
+	var stats *models.BrowserStatsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
+		return nil, fmt.Errorf("failed to decode browsers stats response: %w", err)
+	}
+
+	return stats, nil
+}
