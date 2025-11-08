@@ -35,3 +35,18 @@ type DeviceStat struct {
 	DesktopViews    int64     `json:"desktop_views"`
 	DesktopVisitors int64     `json:"desktop_visitors"`
 }
+
+type BrowserStatsResponse struct {
+	Period              string        `json:"period"`
+	StartDate           time.Time     `json:"start_date"`
+	EndDate             time.Time     `json:"end_date"`
+	TotalViews          int64         `json:"total_views"`
+	TotalUniqueVisitors int64         `json:"total_unique_visitors"`
+	Browsers            []BrowserStat `json:"browsers"`
+}
+
+type BrowserStat struct {
+	Browser  string `json:"browser"`
+	Views    int64  `json:"views"`
+	Visitors int64  `json:"visitors"`
+}

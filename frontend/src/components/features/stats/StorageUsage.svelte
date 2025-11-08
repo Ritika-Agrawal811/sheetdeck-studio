@@ -51,7 +51,7 @@
 
 <script lang="ts">
   import { Database, Layers } from 'lucide-svelte';
-  import SegmentedArc from '../charts/SegmentedArc.svelte';
+  import SegmentedArc from '../charts/SegmentArc.svelte';
 
   import { getUsage } from '../../../queries/config';
 

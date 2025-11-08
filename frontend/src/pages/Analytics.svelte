@@ -11,9 +11,12 @@
       bind:value={periodLabel}
     />
   </header>
-  <section class="chart-grid">
+  <section class="chart-grid-upper">
     <AnalyticsPanel bind:selectedPeriod />
     <DevicesStatCard bind:selectedPeriod />
+  </section>
+  <section class="chart-grid-lower">
+    <BrowsersAndOSCard bind:selectedPeriod />
   </section>
 </section>
 
@@ -21,6 +24,7 @@
   import Dropdown from '../components/common/Dropdown.svelte';
   import AnalyticsPanel from '../components/features/stats/AnalyticsPanel.svelte';
   import DevicesStatCard from '../components/features/stats/DevicesStatCard.svelte';
+  import BrowsersAndOSCard from '../components/features/stats/BrowsersAndOSCard.svelte';
 
   import type { Period } from '../types/analytics';
 
@@ -42,14 +46,6 @@
       label: 'Last 3 Months',
       period: '3m',
     },
-    {
-      label: 'Last 6 Months',
-      period: '6m',
-    },
-    {
-      label: 'Last 12 Months',
-      period: '12m',
-    },
   ];
 
   const periodFilters = periods.map((item) => item.label);
@@ -65,6 +61,8 @@
 <style>
   .analytics-page {
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   header {
@@ -72,9 +70,23 @@
     grid-template-columns: 5fr 1fr;
   }
 
-  .chart-grid {
+  .chart-grid-upper {
     display: grid;
     grid-template-columns: 2.5fr 1.5fr;
     gap: 1.5em;
+  }
+
+  @media (min-width: 1440px) {
+    .chart-grid-upper {
+      grid-template-columns: 2.75fr 1.25fr;
+    }
+  }
+
+  .chart-grid-lower {
+    margin-top: 1.5em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+    flex-grow: 1;
   }
 </style>

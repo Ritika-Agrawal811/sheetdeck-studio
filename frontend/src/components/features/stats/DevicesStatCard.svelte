@@ -23,9 +23,9 @@
   import { getDevicesAnalytics } from '../../../queries/analytics';
   import { devicesStatsToConcentricArcChartData } from '../../../utils/prepareChartData';
 
+  import { DEVICES } from '../../../constants/metrics';
   import type { Period } from '../../../types/analytics';
   import type { ConcentricArcChartData } from '../../../types/chart';
-  import { DEVICES } from '../../../constants/metrics';
 
   export let selectedPeriod: Period = '7d';
 

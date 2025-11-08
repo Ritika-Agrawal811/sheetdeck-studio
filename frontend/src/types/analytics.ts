@@ -40,3 +40,16 @@ type DeviceInterval = {
   desktopViews: number;
   desktopVisitors: number;
 };
+
+export type BrowserData = {
+  period: string;
+  startDate: string;
+  endDate: string;
+  browsers: BrowserStat[];
+};
+
+type BrowserStat = {
+  browser: string;
+  views: number;
+  visitors: number;
+};

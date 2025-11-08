@@ -6,6 +6,10 @@ export function AuthenticateWithTouchID() {
   return window['go']['main']['App']['AuthenticateWithTouchID']();
 }
 
+export function GetBrowsersStats(arg1) {
+  return window['go']['main']['App']['GetBrowsersStats'](arg1);
+}
+
 export function GetCheatSheets(arg1, arg2) {
   return window['go']['main']['App']['GetCheatSheets'](arg1, arg2);
 }

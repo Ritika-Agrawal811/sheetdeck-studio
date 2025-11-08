@@ -89,3 +89,7 @@ func (a *App) GetConfig() (*models.ConfigResponse, error) {
 func (a *App) GetStorageUsage() (*models.UsageResponse, error) {
 	return a.configClient.GetStorageUsage()
 }
+
+func (a *App) GetBrowsersStats(period string) (*models.BrowserStatsResponse, error) {
+	return a.analyticsClient.GetBrowsersStats(period)
+}
