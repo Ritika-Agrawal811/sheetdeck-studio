@@ -81,6 +81,14 @@ func (a *App) GetDevicesStats(period string) (*models.DeviceStatsResponse, error
 	return a.analyticsClient.GetDevicesStats(period)
 }
 
+func (a *App) GetBrowsersStats(period string) (*models.BrowserStatsResponse, error) {
+	return a.analyticsClient.GetBrowsersStats(period)
+}
+
+func (a *App) GetOperatingSystemStats(period string) (*models.OperatingSystemStatsResponse, error) {
+	return a.analyticsClient.GetOperatingSystemStats(period)
+}
+
 /* ---- Config APIs ---- */
 func (a *App) GetConfig() (*models.ConfigResponse, error) {
 	return a.configClient.GetConfig()
@@ -88,8 +96,4 @@ func (a *App) GetConfig() (*models.ConfigResponse, error) {
 
 func (a *App) GetStorageUsage() (*models.UsageResponse, error) {
 	return a.configClient.GetStorageUsage()
-}
-
-func (a *App) GetBrowsersStats(period string) (*models.BrowserStatsResponse, error) {
-	return a.analyticsClient.GetBrowsersStats(period)
 }

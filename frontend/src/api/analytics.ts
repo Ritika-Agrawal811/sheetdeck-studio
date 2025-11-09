@@ -1,7 +1,12 @@
-import { GetBrowsersStats, GetDevicesStats, GetPageviewStats } from '../../wailsjs/go/main/App';
+import {
+  GetBrowsersStats,
+  GetDevicesStats,
+  GetOperatingSystemStats,
+  GetPageviewStats,
+} from '../../wailsjs/go/main/App';
 import { snakeToCamel } from '../utils/caseConverter';
 
-import type { Period, PageviewsData, DeviceData } from '../types/analytics';
+import type { Period, PageviewsData, DeviceData, BrowserData, OperatingSystemData } from '../types/analytics';
 
 export const getPageviewsStats = async (period: Period): Promise<PageviewsData> => {
   const response = await GetPageviewStats(period);
@@ -13,7 +18,12 @@ export const getDevicesStats = async (period: Period): Promise<DeviceData> => {
   return snakeToCamel(response);
 };
 
-export const getBrowsersStats = async (period: Period) => {
+export const getBrowsersStats = async (period: Period): Promise<BrowserData> => {
   const response = await GetBrowsersStats(period);
+  return snakeToCamel(response);
+};
+
+export const getOperatingSystemsStats = async (period: Period): Promise<OperatingSystemData> => {
+  const response = await GetOperatingSystemStats(period);
   return snakeToCamel(response);
 };
