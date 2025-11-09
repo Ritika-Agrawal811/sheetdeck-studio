@@ -102,3 +102,30 @@ func (c *AnalyticsClient) GetBrowsersStats(period string) (*models.BrowserStatsR
 
 	return stats, nil
 }
+
+/**
+ * Get operating systems stats by period - 24h, 7d, 30d, 3m etc
+ * @return *models.OperatingSystemStatsResponse, error
+ */
+func (c *AnalyticsClient) GetOperatingSystemStats(period string) (*models.OperatingSystemStatsResponse, error) {
+	// Build the api URL
+	url := fmt.Sprintf("%s/analytics/summary/os?period=%s", c.baseURL, period)
+
+	// Make the GET response
+	resp, err := c.httpClient.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("faield to fetch operating systems stats: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to operating systems stats. server returned status: %d", resp.StatusCode)
+	}
+
+	var stats *models.OperatingSystemStatsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
+		return nil, fmt.Errorf("failed to decode operating systems stats response: %w", err)
+	}
+
+	return stats, nil
+}

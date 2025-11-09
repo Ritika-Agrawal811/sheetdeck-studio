@@ -53,3 +53,16 @@ type BrowserStat = {
   views: number;
   visitors: number;
 };
+
+export type OperatingSystemData = {
+  period: string;
+  startDate: string;
+  endDate: string;
+  operatingSystems: OperatingSystemStat[];
+};
+
+type OperatingSystemStat = {
+  os: string;
+  views: number;
+  visitors: number;
+};

@@ -4,7 +4,7 @@
     <div class="skeleton-card">
       <div class="skeleton-labels">
         <div class="skeleton-title shimmer"></div>
-        {#each devicesChartData as _}
+        {#each Array(2) as _}
           <div class="skeleton-label-group">
             <div class="skeleton-value shimmer"></div>
             <div class="skeleton-label shimmer"></div>

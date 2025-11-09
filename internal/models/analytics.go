@@ -50,3 +50,18 @@ type BrowserStat struct {
 	Views    int64  `json:"views"`
 	Visitors int64  `json:"visitors"`
 }
+
+type OperatingSystemStatsResponse struct {
+	Period              string                `json:"period"`
+	StartDate           time.Time             `json:"start_date"`
+	EndDate             time.Time             `json:"end_date"`
+	TotalViews          int64                 `json:"total_views"`
+	TotalUniqueVisitors int64                 `json:"total_unique_visitors"`
+	OperatingSystems    []OperatingSystemStat `json:"operating_systems"`
+}
+
+type OperatingSystemStat struct {
+	OS       string `json:"os"`
+	Views    int64  `json:"views"`
+	Visitors int64  `json:"visitors"`
+}
