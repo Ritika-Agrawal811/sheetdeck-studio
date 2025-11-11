@@ -6,6 +6,7 @@ import {
   getOperatingSystemsStats,
   getReferrersStats,
   getRoutesStats,
+  getCountriesStats,
 } from '../api/analytics';
 
 import type { Period } from '../types/analytics';
@@ -64,6 +65,16 @@ export const getRoutesAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['routes', period],
     queryFn: () => getRoutesStats(period),
+    staleTime: 3 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const getCountriesAnalytics = (period: Period) => {
+  return createQuery({
+    queryKey: ['countries', period],
+    queryFn: () => getCountriesStats(period),
     staleTime: 3 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,

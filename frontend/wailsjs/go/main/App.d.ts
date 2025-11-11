@@ -10,6 +10,8 @@ export function GetCheatSheets(arg1: string, arg2: string): Promise<Array<models
 
 export function GetConfig(): Promise<models.ConfigResponse>;
 
+export function GetCountriesStats(arg1: string): Promise<models.CountriesStatsResponse>;
+
 export function GetDevicesStats(arg1: string): Promise<models.DeviceStatsResponse>;
 
 export function GetMetricsOverview(arg1: string): Promise<models.MetricsOverviewResponse>;

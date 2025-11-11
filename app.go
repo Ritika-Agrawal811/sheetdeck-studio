@@ -97,6 +97,10 @@ func (a *App) GetRoutesStats(period string) (*models.RoutesStatsResponse, error)
 	return a.analyticsClient.GetRoutesStats(period)
 }
 
+func (a *App) GetCountriesStats(period string) (*models.CountriesStatsResponse, error) {
+	return a.analyticsClient.GetCountriesStats(period)
+}
+
 /* ---- Config APIs ---- */
 func (a *App) GetConfig() (*models.ConfigResponse, error) {
 	return a.configClient.GetConfig()

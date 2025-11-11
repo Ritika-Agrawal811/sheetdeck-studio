@@ -29,7 +29,7 @@
 
 <style>
   nav {
-    padding: 1.5em 2em;
+    padding: 1.5em;
     display: flex;
     justify-content: space-between;
   }

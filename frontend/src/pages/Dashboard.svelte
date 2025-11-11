@@ -36,7 +36,6 @@
 <style>
   .dashboard {
     height: calc(100vh - 5.625em);
-    padding-top: 1em;
     display: grid;
     grid-template-columns: 250px 1fr;
     transition: all 0.5s;

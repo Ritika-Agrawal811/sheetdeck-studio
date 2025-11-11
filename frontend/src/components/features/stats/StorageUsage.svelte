@@ -58,9 +58,6 @@
   export let isMinimized = false;
 
   $: usage = getUsage();
-  $: if ($usage.data) {
-    console.log('Usage data:', $usage.data);
-  }
 
   $: databaseUsage = $usage.data?.database ?? {
     limitPretty: '500 MB',
