@@ -5,6 +5,7 @@ import {
   GetMetricsOverview,
   GetReferrersStats,
   GetRoutesStats,
+  GetCountriesStats,
 } from '../../wailsjs/go/main/App';
 import { snakeToCamel } from '../utils/caseConverter';
 
@@ -16,6 +17,7 @@ import type {
   OperatingSystemData,
   ReferrersData,
   RoutesData,
+  CountriesData,
 } from '../types/analytics';
 
 export const getMetricsOverview = async (period: Period): Promise<PageviewsData> => {
@@ -45,5 +47,10 @@ export const getReferrersStats = async (period: string): Promise<ReferrersData> 
 
 export const getRoutesStats = async (period: string): Promise<RoutesData> => {
   const response = await GetRoutesStats(period);
+  return snakeToCamel(response);
+};
+
+export const getCountriesStats = async (period: string): Promise<CountriesData> => {
+  const response = await GetCountriesStats(period);
   return snakeToCamel(response);
 };

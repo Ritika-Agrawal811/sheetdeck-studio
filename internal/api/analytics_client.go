@@ -183,3 +183,30 @@ func (c *AnalyticsClient) GetRoutesStats(period string) (*models.RoutesStatsResp
 
 	return stats, nil
 }
+
+/**
+ * Get countries stats by period - 24h, 7d, 30d, 3m etc
+ * @return *models.CountriesStatsResponse, error
+ */
+func (c *AnalyticsClient) GetCountriesStats(period string) (*models.CountriesStatsResponse, error) {
+	// Build the api URL
+	url := fmt.Sprintf("%s/analytics/summary/countries?period=%s", c.baseURL, period)
+
+	// Make the GET response
+	resp, err := c.httpClient.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("faield to fetch countries stats: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to countries stats. server returned status: %d", resp.StatusCode)
+	}
+
+	var stats *models.CountriesStatsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
+		return nil, fmt.Errorf("failed to decode countries stats response: %w", err)
+	}
+
+	return stats, nil
+}

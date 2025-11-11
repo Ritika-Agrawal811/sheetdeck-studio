@@ -29,6 +29,7 @@
     "chartjs-adapter-date-fns": "^3.0.0",
     "d3-scale": "^4.0.2",
     "highlight.js": "^11.11.1",
+    "i18n-iso-countries": "^7.14.0",
     "lucide-svelte": "^0.545.0",
     "svelte-icons": "^2.1.0"
   }

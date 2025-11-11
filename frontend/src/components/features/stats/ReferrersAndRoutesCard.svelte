@@ -25,7 +25,7 @@
       {#if (activeTab === 'route' && $routesStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
         <div class="skeleton-card">
           <div class="skeleton-title shimmer"></div>
-          {#each Array(5) as _}
+          {#each Array(3) as _}
             <div class="skeleton-value shimmer"></div>
           {/each}
         </div>
@@ -100,6 +100,7 @@
   import Modal from '../../common/Modal.svelte';
 
   import { getReferrersAnalytics, getRoutesAnalytics } from '../../../queries/analytics';
+  import { extractDomain, getFaviconUrl } from '../../../utils/getUrlDetails';
   import type { Period } from '../../../types/analytics';
 
   const tabs = [
@@ -120,19 +121,6 @@
 
   const openModal = () => {
     isModalOpen = true;
-  };
-
-  const extractDomain = (url: string): string => {
-    try {
-      const domain = new URL(url).hostname;
-      return domain.replace('www.', '');
-    } catch {
-      return url;
-    }
-  };
-
-  const getFaviconUrl = (domain: string): string => {
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
   };
 </script>
 
@@ -208,7 +196,6 @@
   }
 
   p {
-    color: var(--text-color);
     display: flex;
     align-items: center;
     gap: 0.5em;

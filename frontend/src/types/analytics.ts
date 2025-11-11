@@ -69,6 +69,13 @@ export type RoutesData = {
   routes: DataStat[];
 };
 
+export type CountriesData = {
+  period: string;
+  startDate: string;
+  endDate: string;
+  countries: DataStat[];
+};
+
 type DataStat = {
   name: string;
   views: number;

@@ -18,6 +18,10 @@ export function GetConfig() {
   return window['go']['main']['App']['GetConfig']();
 }
 
+export function GetCountriesStats(arg1) {
+  return window['go']['main']['App']['GetCountriesStats'](arg1);
+}
+
 export function GetDevicesStats(arg1) {
   return window['go']['main']['App']['GetDevicesStats'](arg1);
 }

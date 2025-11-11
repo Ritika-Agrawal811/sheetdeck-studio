@@ -25,7 +25,7 @@
       {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'browser' && $browsersStats.isLoading)}
         <div class="skeleton-card">
           <div class="skeleton-title shimmer"></div>
-          {#each Array(5) as _}
+          {#each Array(3) as _}
             <div class="skeleton-value shimmer"></div>
           {/each}
         </div>

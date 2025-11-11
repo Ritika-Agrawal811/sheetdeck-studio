@@ -18,6 +18,7 @@
   <section class="chart-grid-lower">
     <BrowsersAndOSCard bind:selectedPeriod />
     <ReferrersAndRoutesCard bind:selectedPeriod />
+    <CountriesStatCard bind:selectedPeriod />
   </section>
 </section>
 
@@ -26,6 +27,7 @@
   import AnalyticsPanel from '../components/features/stats/AnalyticsPanel.svelte';
   import DevicesStatCard from '../components/features/stats/DevicesStatCard.svelte';
   import BrowsersAndOSCard from '../components/features/stats/BrowsersAndOSCard.svelte';
+  import CountriesStatCard from '../components/features/stats/CountriesStatCard.svelte';
 
   import type { Period } from '../types/analytics';
   import ReferrersAndRoutesCard from '../components/features/stats/ReferrersAndRoutesCard.svelte';
