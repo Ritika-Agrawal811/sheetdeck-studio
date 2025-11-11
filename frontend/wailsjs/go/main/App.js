@@ -34,6 +34,10 @@ export function GetReferrersStats(arg1) {
   return window['go']['main']['App']['GetReferrersStats'](arg1);
 }
 
+export function GetRoutesStats(arg1) {
+  return window['go']['main']['App']['GetRoutesStats'](arg1);
+}
+
 export function GetStorageUsage() {
   return window['go']['main']['App']['GetStorageUsage']();
 }
