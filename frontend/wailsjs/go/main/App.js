@@ -22,12 +22,16 @@ export function GetDevicesStats(arg1) {
   return window['go']['main']['App']['GetDevicesStats'](arg1);
 }
 
+export function GetMetricsOverview(arg1) {
+  return window['go']['main']['App']['GetMetricsOverview'](arg1);
+}
+
 export function GetOperatingSystemStats(arg1) {
   return window['go']['main']['App']['GetOperatingSystemStats'](arg1);
 }
 
-export function GetPageviewStats(arg1) {
-  return window['go']['main']['App']['GetPageviewStats'](arg1);
+export function GetReferrersStats(arg1) {
+  return window['go']['main']['App']['GetReferrersStats'](arg1);
 }
 
 export function GetStorageUsage() {
