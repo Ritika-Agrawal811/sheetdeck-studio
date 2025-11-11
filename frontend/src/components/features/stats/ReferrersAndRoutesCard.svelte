@@ -22,7 +22,7 @@
   <!-- List -->
   <div class="main">
     {#key activeTab}
-      {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
+      {#if (activeTab === 'route' && $routesStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
         <div class="skeleton-card">
           <div class="skeleton-title shimmer"></div>
           {#each Array(5) as _}
@@ -30,14 +30,13 @@
           {/each}
         </div>
       {:else}
-        {@const stats =
-          activeTab === 'os' ? $operatingSystemsStats.data?.operatingSystems : $referrerStats.data?.referrers}
+        {@const stats = activeTab === 'route' ? $routesStats.data?.routes : $referrerStats.data?.referrers}
         {#if stats}
           <h4>page views</h4>
           <ul class="list">
             {#each stats as item}
               <li class="list-item">
-                {#if activeTab === 'os'}
+                {#if activeTab === 'route'}
                   {item.name}
                 {:else}
                   {@const domain = extractDomain(item.name)}
@@ -63,7 +62,7 @@
   <!-- Modal -->
   <Modal bind:isOpen={isModalOpen} heading={activeTab === 'os' ? 'Operating Systems' : 'Referrers'}>
     {#key activeTab}
-      {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
+      {#if (activeTab === 'route' && $routesStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
         <div class="skeleton-card">
           <div class="skeleton-title shimmer"></div>
           {#each Array(5) as _}
@@ -71,14 +70,13 @@
           {/each}
         </div>
       {:else}
-        {@const stats =
-          activeTab === 'os' ? $operatingSystemsStats.data?.operatingSystems : $referrerStats.data?.referrers}
+        {@const stats = activeTab === 'route' ? $routesStats.data?.routes : $referrerStats.data?.referrers}
         {#if stats}
           <h4>page views</h4>
           <ul class="list">
             {#each stats as item}
               <li class="list-item">
-                {#if activeTab === 'os'}
+                {#if activeTab === 'route'}
                   {item.name}
                 {:else}
                   {@const domain = extractDomain(item.name)}
@@ -101,12 +99,12 @@
   import { Maximize2 } from 'lucide-svelte';
   import Modal from '../../common/Modal.svelte';
 
-  import { getReferrersAnalytics, getOperatingSystemsAnalytics } from '../../../queries/analytics';
+  import { getReferrersAnalytics, getRoutesAnalytics } from '../../../queries/analytics';
   import type { Period } from '../../../types/analytics';
 
   const tabs = [
     { name: 'referrer', label: 'Referrers' },
-    { name: 'os', label: 'Operating Systems' },
+    { name: 'route', label: 'Routes' },
   ];
 
   export let selectedPeriod: Period = '7d';
@@ -114,7 +112,7 @@
   let activeTab: string = 'referrer';
 
   $: referrerStats = getReferrersAnalytics(selectedPeriod);
-  $: operatingSystemsStats = getOperatingSystemsAnalytics(selectedPeriod);
+  $: routesStats = getRoutesAnalytics(selectedPeriod);
 
   const setActiveTab = (tab: string) => {
     activeTab = tab;

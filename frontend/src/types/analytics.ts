@@ -62,6 +62,13 @@ export type ReferrersData = {
   referrers: DataStat[];
 };
 
+export type RoutesData = {
+  period: string;
+  startDate: string;
+  endDate: string;
+  routes: DataStat[];
+};
+
 type DataStat = {
   name: string;
   views: number;

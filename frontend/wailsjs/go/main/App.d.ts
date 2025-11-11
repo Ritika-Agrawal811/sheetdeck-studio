@@ -18,6 +18,8 @@ export function GetOperatingSystemStats(arg1: string): Promise<models.OperatingS
 
 export function GetReferrersStats(arg1: string): Promise<models.ReferrerStatsResponse>;
 
+export function GetRoutesStats(arg1: string): Promise<models.RoutesStatsResponse>;
+
 export function GetStorageUsage(): Promise<models.UsageResponse>;
 
 export function IsMacOS(): Promise<boolean>;

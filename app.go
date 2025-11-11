@@ -93,6 +93,10 @@ func (a *App) GetReferrersStats(period string) (*models.ReferrerStatsResponse, e
 	return a.analyticsClient.GetReferrersStats(period)
 }
 
+func (a *App) GetRoutesStats(period string) (*models.RoutesStatsResponse, error) {
+	return a.analyticsClient.GetRoutesStats(period)
+}
+
 /* ---- Config APIs ---- */
 func (a *App) GetConfig() (*models.ConfigResponse, error) {
 	return a.configClient.GetConfig()

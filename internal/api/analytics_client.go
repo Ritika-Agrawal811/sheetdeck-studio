@@ -156,3 +156,30 @@ func (c *AnalyticsClient) GetReferrersStats(period string) (*models.ReferrerStat
 
 	return stats, nil
 }
+
+/**
+ * Get routes stats by period - 24h, 7d, 30d, 3m etc
+ * @return *models.RoutesStatsResponse, error
+ */
+func (c *AnalyticsClient) GetRoutesStats(period string) (*models.RoutesStatsResponse, error) {
+	// Build the api URL
+	url := fmt.Sprintf("%s/analytics/summary/routes?period=%s", c.baseURL, period)
+
+	// Make the GET response
+	resp, err := c.httpClient.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("faield to fetch routes stats: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to routes stats. server returned status: %d", resp.StatusCode)
+	}
+
+	var stats *models.RoutesStatsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
+		return nil, fmt.Errorf("failed to decode routes stats response: %w", err)
+	}
+
+	return stats, nil
+}

@@ -63,6 +63,15 @@ type ReferrerStatsResponse struct {
 	Referrers           []DataStat `json:"referrers"`
 }
 
+type RoutesStatsResponse struct {
+	Period              string     `json:"period"`
+	StartDate           time.Time  `json:"start_date"`
+	EndDate             time.Time  `json:"end_date"`
+	TotalViews          int64      `json:"total_views"`
+	TotalUniqueVisitors int64      `json:"total_unique_visitors"`
+	Routes              []DataStat `json:"routes"`
+}
+
 type DataStat struct {
 	Name     string `json:"name"`
 	Views    int64  `json:"views"`
