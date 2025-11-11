@@ -73,8 +73,8 @@ func (a *App) UploadCheatsheet(slug, title, category, subcategory string, image 
 }
 
 /* ---- Analytics APIs ---- */
-func (a *App) GetPageviewStats(period string) (*models.PageviewStatsResponse, error) {
-	return a.analyticsClient.GetPageviewsStats(period)
+func (a *App) GetMetricsOverview(period string) (*models.MetricsOverviewResponse, error) {
+	return a.analyticsClient.GetMetricsOverview(period)
 }
 
 func (a *App) GetDevicesStats(period string) (*models.DeviceStatsResponse, error) {
@@ -87,6 +87,10 @@ func (a *App) GetBrowsersStats(period string) (*models.BrowserStatsResponse, err
 
 func (a *App) GetOperatingSystemStats(period string) (*models.OperatingSystemStatsResponse, error) {
 	return a.analyticsClient.GetOperatingSystemStats(period)
+}
+
+func (a *App) GetReferrersStats(period string) (*models.ReferrerStatsResponse, error) {
+	return a.analyticsClient.GetReferrersStats(period)
 }
 
 /* ---- Config APIs ---- */

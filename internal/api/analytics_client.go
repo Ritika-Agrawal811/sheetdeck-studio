@@ -23,27 +23,27 @@ func NewAnalyticsClient(baseURL string) *AnalyticsClient {
 }
 
 /**
- * Get page view stats by period - 24h, 7d, 30d, 3m etc
+ * Get metrics overview by period - 24h, 7d, 30d, 3m etc
  * @return *models.PageviewStatsResponse, error
  */
-func (c *AnalyticsClient) GetPageviewsStats(period string) (*models.PageviewStatsResponse, error) {
+func (c *AnalyticsClient) GetMetricsOverview(period string) (*models.MetricsOverviewResponse, error) {
 	// Build the api URL
-	url := fmt.Sprintf("%s/analytics/pageviews?period=%s", c.baseURL, period)
+	url := fmt.Sprintf("%s/analytics/overview?period=%s", c.baseURL, period)
 
 	// Make the GET response
 	resp, err := c.httpClient.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("faield to fetch page views stats: %w", err)
+		return nil, fmt.Errorf("faield to fetch metrics overview: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("failed to page views stats. server returned status: %d", resp.StatusCode)
+		return nil, fmt.Errorf("failed to metrics overview. server returned status: %d", resp.StatusCode)
 	}
 
-	var stats *models.PageviewStatsResponse
+	var stats *models.MetricsOverviewResponse
 	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
-		return nil, fmt.Errorf("failed to decode oage views stats response: %w", err)
+		return nil, fmt.Errorf("failed to decode metrics overview response: %w", err)
 	}
 
 	return stats, nil
@@ -125,6 +125,33 @@ func (c *AnalyticsClient) GetOperatingSystemStats(period string) (*models.Operat
 	var stats *models.OperatingSystemStatsResponse
 	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
 		return nil, fmt.Errorf("failed to decode operating systems stats response: %w", err)
+	}
+
+	return stats, nil
+}
+
+/**
+ * Get referrers stats by period - 24h, 7d, 30d, 3m etc
+ * @return *models.ReferrerStatsResponse, error
+ */
+func (c *AnalyticsClient) GetReferrersStats(period string) (*models.ReferrerStatsResponse, error) {
+	// Build the api URL
+	url := fmt.Sprintf("%s/analytics/summary/referrers?period=%s", c.baseURL, period)
+
+	// Make the GET response
+	resp, err := c.httpClient.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("faield to fetch referrers stats: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("failed to referrers stats. server returned status: %d", resp.StatusCode)
+	}
+
+	var stats *models.ReferrerStatsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
+		return nil, fmt.Errorf("failed to decode referrers stats response: %w", err)
 	}
 
 	return stats, nil

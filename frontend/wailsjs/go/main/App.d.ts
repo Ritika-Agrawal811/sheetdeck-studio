@@ -12,9 +12,11 @@ export function GetConfig(): Promise<models.ConfigResponse>;
 
 export function GetDevicesStats(arg1: string): Promise<models.DeviceStatsResponse>;
 
+export function GetMetricsOverview(arg1: string): Promise<models.MetricsOverviewResponse>;
+
 export function GetOperatingSystemStats(arg1: string): Promise<models.OperatingSystemStatsResponse>;
 
-export function GetPageviewStats(arg1: string): Promise<models.PageviewStatsResponse>;
+export function GetReferrersStats(arg1: string): Promise<models.ReferrerStatsResponse>;
 
 export function GetStorageUsage(): Promise<models.UsageResponse>;
 

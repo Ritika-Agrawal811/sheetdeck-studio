@@ -2,16 +2,16 @@ package models
 
 import "time"
 
-type PageviewStatsResponse struct {
-	Period              string         `json:"period"`
-	StartDate           time.Time      `json:"start_date"`
-	EndDate             time.Time      `json:"end_date"`
-	TotalViews          int64          `json:"total_views"`
-	TotalUniqueVisitors int64          `json:"total_unique_visitors"`
-	Intervals           []PageviewStat `json:"intervals"`
+type MetricsOverviewResponse struct {
+	Period              string            `json:"period"`
+	StartDate           time.Time         `json:"start_date"`
+	EndDate             time.Time         `json:"end_date"`
+	TotalViews          int64             `json:"total_views"`
+	TotalUniqueVisitors int64             `json:"total_unique_visitors"`
+	Intervals           []MetricsOverview `json:"intervals"`
 }
 
-type PageviewStat struct {
+type MetricsOverview struct {
 	Date     time.Time `json:"date"`
 	Views    int64     `json:"views"`
 	Visitors int64     `json:"visitors"`
@@ -37,31 +37,34 @@ type DeviceStat struct {
 }
 
 type BrowserStatsResponse struct {
-	Period              string        `json:"period"`
-	StartDate           time.Time     `json:"start_date"`
-	EndDate             time.Time     `json:"end_date"`
-	TotalViews          int64         `json:"total_views"`
-	TotalUniqueVisitors int64         `json:"total_unique_visitors"`
-	Browsers            []BrowserStat `json:"browsers"`
-}
-
-type BrowserStat struct {
-	Browser  string `json:"browser"`
-	Views    int64  `json:"views"`
-	Visitors int64  `json:"visitors"`
+	Period              string     `json:"period"`
+	StartDate           time.Time  `json:"start_date"`
+	EndDate             time.Time  `json:"end_date"`
+	TotalViews          int64      `json:"total_views"`
+	TotalUniqueVisitors int64      `json:"total_unique_visitors"`
+	Browsers            []DataStat `json:"browsers"`
 }
 
 type OperatingSystemStatsResponse struct {
-	Period              string                `json:"period"`
-	StartDate           time.Time             `json:"start_date"`
-	EndDate             time.Time             `json:"end_date"`
-	TotalViews          int64                 `json:"total_views"`
-	TotalUniqueVisitors int64                 `json:"total_unique_visitors"`
-	OperatingSystems    []OperatingSystemStat `json:"operating_systems"`
+	Period              string     `json:"period"`
+	StartDate           time.Time  `json:"start_date"`
+	EndDate             time.Time  `json:"end_date"`
+	TotalViews          int64      `json:"total_views"`
+	TotalUniqueVisitors int64      `json:"total_unique_visitors"`
+	OperatingSystems    []DataStat `json:"operating_systems"`
 }
 
-type OperatingSystemStat struct {
-	OS       string `json:"os"`
+type ReferrerStatsResponse struct {
+	Period              string     `json:"period"`
+	StartDate           time.Time  `json:"start_date"`
+	EndDate             time.Time  `json:"end_date"`
+	TotalViews          int64      `json:"total_views"`
+	TotalUniqueVisitors int64      `json:"total_unique_visitors"`
+	Referrers           []DataStat `json:"referrers"`
+}
+
+type DataStat struct {
+	Name     string `json:"name"`
 	Views    int64  `json:"views"`
 	Visitors int64  `json:"visitors"`
 }

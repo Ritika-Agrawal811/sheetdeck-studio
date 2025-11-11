@@ -36,10 +36,9 @@
   import Area from '../charts/Area.svelte';
 
   import { METRICS, type Metric } from '../../../constants/metrics';
-  import type { AreaChartData } from '../../../types/chart';
   import type { MetricsData, Period } from '../../../types/analytics';
 
-  import { getPageviewsAnalytics } from '../../../queries/analytics';
+  import { getMetricsAnalytics } from '../../../queries/analytics';
   import { pageviewsStatstoAreaChartData } from '../../../utils/prepareChartData';
 
   export let selectedPeriod: Period = '7d';
@@ -47,7 +46,7 @@
 
   let metricsData: MetricsData[] = METRICS.map((item) => ({ type: item.type, value: 0 }));
 
-  $: pageviewsStats = getPageviewsAnalytics(selectedPeriod);
+  $: pageviewsStats = getMetricsAnalytics(selectedPeriod);
 
   $: if ($pageviewsStats.data) {
     metricsData = METRICS.map((item) => {

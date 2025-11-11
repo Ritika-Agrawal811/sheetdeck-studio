@@ -1,6 +1,6 @@
 {#if isOpen}
   <section class="modal-container">
-    <Backdrop />
+    <Backdrop show={isOpen} onClick={closeModal} />
     <div class="modal-content">
       <h3 class="sub-heading">{heading}</h3>
       <button class="close-btn" on:click={closeModal}><CircleX size={20} /></button>

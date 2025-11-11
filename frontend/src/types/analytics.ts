@@ -45,24 +45,25 @@ export type BrowserData = {
   period: string;
   startDate: string;
   endDate: string;
-  browsers: BrowserStat[];
-};
-
-type BrowserStat = {
-  browser: string;
-  views: number;
-  visitors: number;
+  browsers: DataStat[];
 };
 
 export type OperatingSystemData = {
   period: string;
   startDate: string;
   endDate: string;
-  operatingSystems: OperatingSystemStat[];
+  operatingSystems: DataStat[];
 };
 
-type OperatingSystemStat = {
-  os: string;
+export type ReferrersData = {
+  period: string;
+  startDate: string;
+  endDate: string;
+  referrers: DataStat[];
+};
+
+type DataStat = {
+  name: string;
   views: number;
   visitors: number;
 };

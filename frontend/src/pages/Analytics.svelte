@@ -17,6 +17,7 @@
   </section>
   <section class="chart-grid-lower">
     <BrowsersAndOSCard bind:selectedPeriod />
+    <ReferrersAndRoutesCard bind:selectedPeriod />
   </section>
 </section>
 
@@ -27,6 +28,7 @@
   import BrowsersAndOSCard from '../components/features/stats/BrowsersAndOSCard.svelte';
 
   import type { Period } from '../types/analytics';
+  import ReferrersAndRoutesCard from '../components/features/stats/ReferrersAndRoutesCard.svelte';
 
   /* ---- time filter dropdown ---- */
   const periods = [

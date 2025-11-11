@@ -1,4 +1,4 @@
-<section class="browsers-os-chart-container">
+<section class="referrers-routes-chart-container">
   <nav>
     <!-- Tabs List -->
     <ul role="tablist" class="tabs">
@@ -22,7 +22,7 @@
   <!-- List -->
   <div class="main">
     {#key activeTab}
-      {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'browser' && $browsersStats.isLoading)}
+      {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
         <div class="skeleton-card">
           <div class="skeleton-title shimmer"></div>
           {#each Array(5) as _}
@@ -31,13 +31,21 @@
         </div>
       {:else}
         {@const stats =
-          activeTab === 'os' ? $operatingSystemsStats.data?.operatingSystems : $browsersStats.data?.browsers}
+          activeTab === 'os' ? $operatingSystemsStats.data?.operatingSystems : $referrerStats.data?.referrers}
         {#if stats}
           <h4>page views</h4>
           <ul class="list">
             {#each stats as item}
               <li class="list-item">
-                {item.name}
+                {#if activeTab === 'os'}
+                  {item.name}
+                {:else}
+                  {@const domain = extractDomain(item.name)}
+                  <p>
+                    <img src={getFaviconUrl(domain)} alt={domain} width="15" height="15" />
+                    {domain}
+                  </p>
+                {/if}
                 <span>{item.views}</span>
               </li>
             {/each}
@@ -53,9 +61,9 @@
   </div>
 
   <!-- Modal -->
-  <Modal bind:isOpen={isModalOpen} heading={activeTab === 'os' ? 'Operating Systems' : 'Browsers'}>
+  <Modal bind:isOpen={isModalOpen} heading={activeTab === 'os' ? 'Operating Systems' : 'Referrers'}>
     {#key activeTab}
-      {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'browser' && $browsersStats.isLoading)}
+      {#if (activeTab === 'os' && $operatingSystemsStats.isLoading) || (activeTab === 'referrer' && $referrerStats.isLoading)}
         <div class="skeleton-card">
           <div class="skeleton-title shimmer"></div>
           {#each Array(5) as _}
@@ -64,13 +72,21 @@
         </div>
       {:else}
         {@const stats =
-          activeTab === 'os' ? $operatingSystemsStats.data?.operatingSystems : $browsersStats.data?.browsers}
+          activeTab === 'os' ? $operatingSystemsStats.data?.operatingSystems : $referrerStats.data?.referrers}
         {#if stats}
           <h4>page views</h4>
           <ul class="list">
             {#each stats as item}
               <li class="list-item">
-                {item.name}
+                {#if activeTab === 'os'}
+                  {item.name}
+                {:else}
+                  {@const domain = extractDomain(item.name)}
+                  <p>
+                    <img src={getFaviconUrl(domain)} alt={domain} width="15" height="15" />
+                    {domain}
+                  </p>
+                {/if}
                 <span>{item.views}</span>
               </li>
             {/each}
@@ -85,19 +101,19 @@
   import { Maximize2 } from 'lucide-svelte';
   import Modal from '../../common/Modal.svelte';
 
-  import { getBrowsersAnalytics, getOperatingSystemsAnalytics } from '../../../queries/analytics';
+  import { getReferrersAnalytics, getOperatingSystemsAnalytics } from '../../../queries/analytics';
   import type { Period } from '../../../types/analytics';
 
   const tabs = [
-    { name: 'browser', label: 'Browsers' },
+    { name: 'referrer', label: 'Referrers' },
     { name: 'os', label: 'Operating Systems' },
   ];
 
   export let selectedPeriod: Period = '7d';
   export let isModalOpen: boolean = false;
-  let activeTab: string = 'browser';
+  let activeTab: string = 'referrer';
 
-  $: browsersStats = getBrowsersAnalytics(selectedPeriod);
+  $: referrerStats = getReferrersAnalytics(selectedPeriod);
   $: operatingSystemsStats = getOperatingSystemsAnalytics(selectedPeriod);
 
   const setActiveTab = (tab: string) => {
@@ -107,10 +123,23 @@
   const openModal = () => {
     isModalOpen = true;
   };
+
+  const extractDomain = (url: string): string => {
+    try {
+      const domain = new URL(url).hostname;
+      return domain.replace('www.', '');
+    } catch {
+      return url;
+    }
+  };
+
+  const getFaviconUrl = (domain: string): string => {
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+  };
 </script>
 
 <style>
-  .browsers-os-chart-container {
+  .referrers-routes-chart-container {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -178,6 +207,13 @@
     border-left: 1px solid var(--dark-gray-color);
     border-bottom: 1px solid var(--gray-color);
     border-radius: 5px;
+  }
+
+  p {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
   }
 
   /* ---- view all button ---- */
