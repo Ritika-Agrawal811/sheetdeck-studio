@@ -15,6 +15,7 @@ type Cheatsheet struct {
 	Category    string             `json:"category"`
 	Subcategory string             `json:"subcategory"`
 	ImageUrl    pgtype.Text        `json:"image_url"`
+	ImageSize   pgtype.Int8        `json:"image_size"`
 	CreatedAt   pgtype.Timestamptz `json:"created_at"`
 	UpdatedAt   pgtype.Timestamptz `json:"updated_at"`
 }
