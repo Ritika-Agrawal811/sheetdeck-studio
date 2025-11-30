@@ -12,6 +12,7 @@ export type Cheatsheet = {
   category: string;
   subcategory: string;
   imageUrl: string;
+  imageSize: number;
   createdAt: string;
   updatedAt: string;
 };
