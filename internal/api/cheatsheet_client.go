@@ -29,9 +29,9 @@ func NewCheatsheetClient(baseURL string) *CheatsheetClient {
  * Get all cheat sheets
  * @return []models.Cheatsheet, error
  */
-func (c *CheatsheetClient) GetCheatsheets(category string, subcategory string) ([]models.Cheatsheet, error) {
+func (c *CheatsheetClient) GetCheatsheets(category string, subcategory string, sort string) ([]models.Cheatsheet, error) {
 	// Build the api URL
-	url := fmt.Sprintf("%s/cheatsheets?category=%s&subcategory=%s", c.baseURL, category, subcategory)
+	url := fmt.Sprintf("%s/cheatsheets?category=%s&subcategory=%s&sort=%s", c.baseURL, category, subcategory, sort)
 
 	// Make the GET repquest
 	resp, err := c.httpClient.Get(url)

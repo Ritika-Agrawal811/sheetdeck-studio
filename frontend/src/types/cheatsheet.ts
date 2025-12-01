@@ -15,14 +15,8 @@ export type Cheatsheet = {
   imageSize: number;
   createdAt: string;
   updatedAt: string;
+  downloads: number;
+  views: number;
 };
 
-export interface CheatsheetFilters {
-  category?: string;
-  subCategory?: string;
-  search?: string;
-  page?: number;
-  limit?: number;
-  sortBy?: 'title' | 'views' | 'createdAt';
-  sortOrder?: 'asc' | 'desc';
-}
+export type SortFilters = 'recent' | 'oldest' | 'most_viewed' | 'least_viewed' | 'most_downloaded' | 'least_downloaded';

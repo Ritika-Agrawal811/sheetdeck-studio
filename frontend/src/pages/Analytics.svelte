@@ -55,11 +55,8 @@
   const periodFilters = periods.map((item) => item.label);
 
   let periodLabel: string = 'Last 7 Days';
-  let selectedPeriod: Period = '7d';
 
-  $: if (periodLabel) {
-    selectedPeriod = (periods.find((p) => p.label === periodLabel)?.period as Period) ?? '7d';
-  }
+  $: selectedPeriod = (periods.find((p) => p.label === periodLabel)?.period as Period) ?? '7d';
 </script>
 
 <style>

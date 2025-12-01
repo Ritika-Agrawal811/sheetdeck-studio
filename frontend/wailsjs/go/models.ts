@@ -117,6 +117,8 @@ export namespace models {
     image_size: pgtype.Int8;
     created_at: pgtype.Timestamptz;
     updated_at: pgtype.Timestamptz;
+    downloads: number;
+    views: number;
 
     static createFrom(source: any = {}) {
       return new Cheatsheet(source);
@@ -133,6 +135,8 @@ export namespace models {
       this.image_size = this.convertValues(source['image_size'], pgtype.Int8);
       this.created_at = this.convertValues(source['created_at'], pgtype.Timestamptz);
       this.updated_at = this.convertValues(source['updated_at'], pgtype.Timestamptz);
+      this.downloads = source['downloads'];
+      this.views = source['views'];
     }
 
     convertValues(a: any, classs: any, asMap: boolean = false): any {

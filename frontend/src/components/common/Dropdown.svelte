@@ -125,7 +125,7 @@
     top: 105%;
     left: 0;
     right: 0;
-    z-index: 10;
+    z-index: 50;
     overflow-y: auto;
     width: 100%;
     max-height: 200px;

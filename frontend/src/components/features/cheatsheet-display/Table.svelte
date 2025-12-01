@@ -4,7 +4,7 @@
       <tr>
         <th class="w-40">Title</th>
         <th>Category</th>
-        <th>Last Modified</th>
+        <th>{getColumnHeader(selectedFilter)}</th>
         <th>File Size</th>
       </tr>
     </thead>
@@ -18,7 +18,7 @@
               {getCategory(item.category)}
             </div>
           </td>
-          <td>{formatDate(item.updatedAt)}</td>
+          <td>{getCellValue(item, selectedFilter)}</td>
           <td>{formatFileSize(item.imageSize)}</td>
         </tr>
       {/each}
@@ -27,15 +27,28 @@
 </div>
 
 <script lang="ts">
-  import type { Cheatsheet } from '../../../types/cheatsheet';
+  import type { Cheatsheet, SortFilters } from '../../../types/cheatsheet';
   import { CATEGORIES_INFO, type CategoryKey } from '../../../constants/categories';
   import { formatDate } from '../../../utils/formatDate';
   import { formatFileSize } from '../../../utils/formatFileSize';
 
   export let data: Cheatsheet[];
+  export let selectedFilter: SortFilters = 'recent';
 
   let tableElement: HTMLDivElement | undefined = undefined;
   export { tableElement as this };
+
+  const getColumnHeader = (filter: SortFilters) => {
+    if (filter.includes('downloaded')) return 'Downloads';
+    if (filter.includes('viewed')) return 'Views';
+    return 'Last Modified';
+  };
+
+  const getCellValue = (item: Cheatsheet, filter: SortFilters) => {
+    if (filter.includes('downloaded')) return item.downloads;
+    if (filter.includes('viewed')) return item.views;
+    return formatDate(item.createdAt);
+  };
 
   const getCategory = (category: string) => {
     return CATEGORIES_INFO[category as CategoryKey].title;
@@ -72,7 +85,7 @@
     top: -5px;
     border-radius: 10px;
     background-color: var(--light-gray-color);
-    z-index: 10;
+    z-index: 5;
   }
 
   th,
@@ -90,7 +103,7 @@
     color: var(--color);
     border-radius: 100vmax;
     padding: 0.2em 0.75em;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     width: fit-content;
   }
 

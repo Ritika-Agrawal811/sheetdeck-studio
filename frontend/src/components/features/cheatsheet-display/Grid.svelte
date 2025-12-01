@@ -8,16 +8,26 @@
         <img src={item.imageUrl} alt={item.title} />
       </figure>
 
-      <h4>{item.title}</h4>
+      <h4>
+        {item.title}
+
+        {#if selectedFilter.includes('downloaded')}
+          <div class="filter-tag"><ArrowDownToLine size={16} /> {item.downloads}</div>
+        {:else if selectedFilter.includes('viewed')}
+          <div class="filter-tag"><ChartNoAxesColumn size={16} /> {item.views}</div>
+        {/if}
+      </h4>
     </article>
   {/each}
 </div>
 
 <script lang="ts">
-  import type { Cheatsheet } from '../../../types/cheatsheet';
+  import type { Cheatsheet, SortFilters } from '../../../types/cheatsheet';
   import { CATEGORIES_INFO, type CategoryKey } from '../../../constants/categories';
+  import { ArrowDownToLine, ChartNoAxesColumn } from 'lucide-svelte';
 
   export let data: Cheatsheet[];
+  export let selectedFilter: SortFilters = 'recent';
 
   let gridElement: HTMLDivElement | undefined = undefined;
   export { gridElement as this };
@@ -73,9 +83,26 @@
   }
 
   h4 {
+    position: relative;
+    font-size: 0.95rem;
     font-weight: 400;
     text-align: center;
     margin: 0.65em 0;
+  }
+
+  .filter-tag {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .filter-tag:hover {
+    color: var(--blue-color);
   }
 
   .tag {
