@@ -18,6 +18,8 @@ type Cheatsheet struct {
 	ImageSize   pgtype.Int8        `json:"image_size"`
 	CreatedAt   pgtype.Timestamptz `json:"created_at"`
 	UpdatedAt   pgtype.Timestamptz `json:"updated_at"`
+	Downloads   int64              `json:"downloads"`
+	Views       int64              `json:"views"`
 }
 
 type CheatsheetMetadata struct {

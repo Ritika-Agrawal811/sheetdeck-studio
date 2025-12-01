@@ -6,7 +6,7 @@ export function AuthenticateWithTouchID(): Promise<boolean>;
 
 export function GetBrowsersStats(arg1: string): Promise<models.BrowserStatsResponse>;
 
-export function GetCheatSheets(arg1: string, arg2: string): Promise<Array<models.Cheatsheet>>;
+export function GetCheatSheets(arg1: string, arg2: string, arg3: string): Promise<Array<models.Cheatsheet>>;
 
 export function GetConfig(): Promise<models.ConfigResponse>;
 

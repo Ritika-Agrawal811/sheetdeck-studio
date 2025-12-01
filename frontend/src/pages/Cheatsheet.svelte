@@ -13,16 +13,24 @@
             <TableOfContents size={25} />
           </button>
         </div>
-        <Dropdown list={filters} name="filters" label={null} id="filter-select" variant="pill" size="small" />
+        <Dropdown
+          list={sortFilters}
+          name="filters"
+          label={null}
+          id="filter-select"
+          variant="pill"
+          size="small"
+          bind:value={sortLabel}
+        />
       </header>
       <section>
         {#if $cheatsheets.isLoading}
           <Loader label="Loading Cheat Sheets" />
         {:else if $cheatsheets.data}
           {#if layout === 'grid'}
-            <Grid data={$cheatsheets.data} bind:this={gridElement} />
+            <Grid data={$cheatsheets.data} bind:this={gridElement} {selectedFilter} />
           {:else}
-            <Table data={$cheatsheets.data} bind:this={tableElement} />
+            <Table data={$cheatsheets.data} bind:this={tableElement} {selectedFilter} />
           {/if}
         {/if}
       </section>
@@ -45,28 +53,32 @@
   import { getCheatSheets } from '../queries/cheatsheets';
   import type GridComponent from '../components/features/cheatsheet-display/Grid.svelte';
   import type TableComponent from '../components/features/cheatsheet-display/Table.svelte';
+  import type { SortFilters } from '../types/cheatsheet';
 
   /* ---- filter dropdown ---- */
   const filters = [
-    'Most recent',
-    'Oldest first',
-    'Most viewed',
-    'Least viewed',
-    'Most downloaded',
-    'Least downloaded',
-    'Recently updated',
+    { label: 'Most recent', value: 'recent' },
+    { label: 'Oldest first', value: 'oldest' },
+    { label: 'Most viewed', value: 'most_viewed' },
+    { label: 'Least viewed', value: 'least_viewed' },
+    { label: 'Most downloaded', value: 'most_downloaded' },
+    { label: 'Least downloaded', value: 'least_downloaded' },
   ];
+
+  const sortFilters = filters.map((item) => item.label);
 
   let layout: 'grid' | 'table' = 'grid';
 
   /* ---- cheat sheets data ---- */
   let activeCategory: string = 'html';
   let activeSubcategory: string = 'concepts';
+  let sortLabel: string = 'Most recent';
 
   let gridElement: GridComponent;
   let tableElement: TableComponent;
 
-  $: cheatsheets = getCheatSheets(activeCategory, activeSubcategory);
+  $: selectedFilter = (filters.find((p) => p.label === sortLabel)?.value as SortFilters) ?? 'recent';
+  $: cheatsheets = getCheatSheets(activeCategory, activeSubcategory, selectedFilter);
 
   const setLayout = (layoutType: 'grid' | 'table') => {
     layout = layoutType;

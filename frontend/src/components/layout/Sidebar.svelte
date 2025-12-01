@@ -54,7 +54,6 @@
   export let isMinimized = false;
 
   const toggleSidebar = () => {
-    console.log('clicked');
     isMinimized = !isMinimized;
   };
 
