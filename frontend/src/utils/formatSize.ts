@@ -5,7 +5,7 @@
  * @param decimals
  * @return string
  */
-export const formatFileSize = (size: number, decimals: number = 2) => {
+export const formatSize = (size: number, decimals: number = 2) => {
   if (size === 0) return '0 Bytes';
 
   const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];

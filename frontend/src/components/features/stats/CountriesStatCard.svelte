@@ -14,7 +14,7 @@
       {:else if $countriesStats.data}
         {@const topCountries = $countriesStats.data?.countries?.slice(0, 3) ?? []}
         {#each topCountries as item, index}
-          {@const flagUrl = getCountryFlagUrl(item.name)}
+          {@const flagUrl = getCountryFlagUrl(item.code)}
           <li class="chart-bar">
             <p>
               {#if flagUrl}
@@ -52,7 +52,7 @@
       <h4>page views</h4>
       <ul class="list">
         {#each $countriesStats.data?.countries as item}
-          {@const flagUrl = getCountryFlagUrl(item.name)}
+          {@const flagUrl = getCountryFlagUrl(item.code)}
           <li class="list-item">
             <p>
               {#if flagUrl}
@@ -128,7 +128,7 @@
   .chart-bar .bar {
     height: 20px;
     border-radius: 5px;
-    background: var(--blue-color);
+    background: var(--green-color);
   }
 
   .list-item {

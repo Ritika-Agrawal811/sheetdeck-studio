@@ -1,115 +1,56 @@
-<article class="stat-card {layout} {variant}">
-  <div class="stat-header">
-    <h3>{label}</h3>
-    {#if redirect}
-      <button class="stat-redirect-icon" on:click={() => setActivePath(redirect)}>
-        <MoveUpRight size={20} />
-      </button>
-    {:else}
-      <span class="stat-icon">
-        <svelte:component this={icon} size={30} />
-      </span>
-    {/if}
-  </div>
-  <span class="stat">{value}</span>
+<article class="stat-card">
+  <span class="stat-icon">
+    <svelte:component this={icon} size={20} />
+  </span>
+  <h3>{label}</h3>
+  <p class="stat">{value}</p>
 </article>
 
 <script lang="ts">
-  import { MoveUpRight } from 'lucide-svelte';
   import type { ComponentType } from 'svelte';
-  import { setActivePath, type Paths } from '../../../stores/navigate';
 
   export let label: string = '';
   export let value: number = 0;
   export let icon: ComponentType | null = null;
-  export let layout: 'vertical' | 'horizontal' = 'vertical';
-  export let variant: 'fill' | 'outline' = 'outline';
-  export let redirect: Paths | null = null;
 </script>
 
 <style>
   .stat-card {
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    min-width: fit-content;
-    border: 2px solid transparent;
+    height: 155px;
+    padding: 1em;
+    border: 1px solid var(--gray-color);
     border-radius: 10px;
-    box-shadow: 0 0 0.15em 0.15em var(--light-gray-color);
-  }
-
-  /* ---- variant classes ---- */
-  .stat-card.outline {
-    border: 2px solid var(--gray-color);
-  }
-
-  .stat-card.fill {
-    background-color: var(--blue-color);
-    color: var(--background);
-  }
-
-  /* ---- layout classes ---- */
-
-  .stat-card.vertical {
-    height: 160px;
-    flex-direction: column;
-    padding: 1em 1.25em;
-  }
-
-  .stat-card.horizontal {
-    align-items: center;
-    gap: 2em;
-    padding: 0.5em 1.15em;
-  }
-
-  .stat-card .stat-header {
-    display: flex;
-    align-items: center;
-  }
-
-  .stat-card.vertical .stat-header {
-    justify-content: space-between;
-    gap: 3em;
-  }
-
-  .stat-card.horizontal .stat-header {
-    gap: 1em;
   }
 
   .stat-card h3 {
     font-size: 1rem;
+    margin-top: 0.75em;
   }
 
-  .stat-card.vertical .stat {
-    font-size: 3rem;
-  }
-
-  .stat-card.horizontal .stat {
-    font-size: 1.75rem;
+  .stat {
+    font-size: 2.15rem;
+    margin-top: 0.25em;
   }
 
   .stat-icon {
-    color: var(--green-color);
-  }
-
-  /* --- redirect icon classes ---- */
-  .stat-redirect-icon {
-    width: 2rem;
-    height: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    background-color: var(--background);
-    color: var(--dark-gray-color);
-    transition: all 0.2s;
-    cursor: pointer;
-    outline: none;
-    border: none;
+    justify-content: center;
+    width: fit-content;
+    color: var(--blue-color);
+    background-color: var(--light-blue-color);
+    padding: 0.5em;
+    border-radius: 5px;
   }
 
-  .stat-redirect-icon:hover {
-    background-color: var(--orange-color);
-    color: var(--background);
+  @media (min-width: 1440px) {
+    .stat-card {
+      height: 165px;
+      padding: 1em;
+    }
+
+    .stat {
+      margin-top: 0.5em;
+    }
   }
 </style>

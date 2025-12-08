@@ -213,6 +213,26 @@ export namespace models {
       return a;
     }
   }
+  export class CountryStat {
+    name: string;
+    views: number;
+    visitors: number;
+    code: string;
+    numeric_code: string;
+
+    static createFrom(source: any = {}) {
+      return new CountryStat(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.name = source['name'];
+      this.views = source['views'];
+      this.visitors = source['visitors'];
+      this.code = source['code'];
+      this.numeric_code = source['numeric_code'];
+    }
+  }
   export class CountriesStatsResponse {
     period: string;
     // Go type: time
@@ -221,7 +241,7 @@ export namespace models {
     end_date: any;
     total_views: number;
     total_unique_visitors: number;
-    countries: DataStat[];
+    countries: CountryStat[];
 
     static createFrom(source: any = {}) {
       return new CountriesStatsResponse(source);
@@ -234,7 +254,7 @@ export namespace models {
       this.end_date = this.convertValues(source['end_date'], null);
       this.total_views = source['total_views'];
       this.total_unique_visitors = source['total_unique_visitors'];
-      this.countries = this.convertValues(source['countries'], DataStat);
+      this.countries = this.convertValues(source['countries'], CountryStat);
     }
 
     convertValues(a: any, classs: any, asMap: boolean = false): any {
@@ -256,6 +276,62 @@ export namespace models {
     }
   }
 
+  export class TableData {
+    schema_name: string;
+    table_name: string;
+    size: string;
+
+    static createFrom(source: any = {}) {
+      return new TableData(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.schema_name = source['schema_name'];
+      this.table_name = source['table_name'];
+      this.size = source['size'];
+    }
+  }
+  export class DatabaseUsage {
+    size_bytes: number;
+    size_pretty: string;
+    limit_bytes: number;
+    limit_pretty: string;
+    usage_percent: number;
+    tables: TableData[];
+
+    static createFrom(source: any = {}) {
+      return new DatabaseUsage(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.size_bytes = source['size_bytes'];
+      this.size_pretty = source['size_pretty'];
+      this.limit_bytes = source['limit_bytes'];
+      this.limit_pretty = source['limit_pretty'];
+      this.usage_percent = source['usage_percent'];
+      this.tables = this.convertValues(source['tables'], TableData);
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
   export class DeviceStat {
     // Go type: time
     date: any;
@@ -339,6 +415,22 @@ export namespace models {
         return new classs(a);
       }
       return a;
+    }
+  }
+  export class FileData {
+    title: string;
+    category: string;
+    size: string;
+
+    static createFrom(source: any = {}) {
+      return new FileData(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.title = source['title'];
+      this.category = source['category'];
+      this.size = source['size'];
     }
   }
 
@@ -503,26 +595,6 @@ export namespace models {
       return a;
     }
   }
-  export class ResourceUsage {
-    size_bytes: number;
-    size_pretty: string;
-    limit_bytes: number;
-    limit_pretty: string;
-    usage_percent: number;
-
-    static createFrom(source: any = {}) {
-      return new ResourceUsage(source);
-    }
-
-    constructor(source: any = {}) {
-      if ('string' === typeof source) source = JSON.parse(source);
-      this.size_bytes = source['size_bytes'];
-      this.size_pretty = source['size_pretty'];
-      this.limit_bytes = source['limit_bytes'];
-      this.limit_pretty = source['limit_pretty'];
-      this.usage_percent = source['usage_percent'];
-    }
-  }
   export class RoutesStatsResponse {
     period: string;
     // Go type: time
@@ -565,10 +637,50 @@ export namespace models {
       return a;
     }
   }
+  export class StorageUsage {
+    size_bytes: number;
+    size_pretty: string;
+    limit_bytes: number;
+    limit_pretty: string;
+    usage_percent: number;
+    files: FileData[];
+
+    static createFrom(source: any = {}) {
+      return new StorageUsage(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.size_bytes = source['size_bytes'];
+      this.size_pretty = source['size_pretty'];
+      this.limit_bytes = source['limit_bytes'];
+      this.limit_pretty = source['limit_pretty'];
+      this.usage_percent = source['usage_percent'];
+      this.files = this.convertValues(source['files'], FileData);
+    }
+
+    convertValues(a: any, classs: any, asMap: boolean = false): any {
+      if (!a) {
+        return a;
+      }
+      if (a.slice && a.map) {
+        return (a as any[]).map((elem) => this.convertValues(elem, classs));
+      } else if ('object' === typeof a) {
+        if (asMap) {
+          for (const key of Object.keys(a)) {
+            a[key] = new classs(a[key]);
+          }
+          return a;
+        }
+        return new classs(a);
+      }
+      return a;
+    }
+  }
 
   export class UsageResponse {
-    database: ResourceUsage;
-    storage: ResourceUsage;
+    database: DatabaseUsage;
+    storage: StorageUsage;
     timestamp: string;
 
     static createFrom(source: any = {}) {
@@ -577,8 +689,8 @@ export namespace models {
 
     constructor(source: any = {}) {
       if ('string' === typeof source) source = JSON.parse(source);
-      this.database = this.convertValues(source['database'], ResourceUsage);
-      this.storage = this.convertValues(source['storage'], ResourceUsage);
+      this.database = this.convertValues(source['database'], DatabaseUsage);
+      this.storage = this.convertValues(source['storage'], StorageUsage);
       this.timestamp = source['timestamp'];
     }
 

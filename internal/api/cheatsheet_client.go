@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"net/textproto"
 	"sheetdeck-studio/internal/models"
+	"sheetdeck-studio/internal/pkg/utils"
+	"strconv"
 	"time"
 )
 
@@ -29,9 +31,15 @@ func NewCheatsheetClient(baseURL string) *CheatsheetClient {
  * Get all cheat sheets
  * @return []models.Cheatsheet, error
  */
-func (c *CheatsheetClient) GetCheatsheets(category string, subcategory string, sort string) ([]models.Cheatsheet, error) {
+func (c *CheatsheetClient) GetCheatsheets(category string, subcategory string, sort string, limit int) ([]models.Cheatsheet, error) {
+
 	// Build the api URL
-	url := fmt.Sprintf("%s/cheatsheets?category=%s&subcategory=%s&sort=%s", c.baseURL, category, subcategory, sort)
+	url := utils.NewURLBuilder(c.baseURL, "/cheatsheets").
+		AddParam("category", category).
+		AddParam("subcategory", subcategory).
+		AddParam("sort", sort).
+		AddParam("limit", strconv.Itoa(limit)).
+		Build()
 
 	// Make the GET repquest
 	resp, err := c.httpClient.Get(url)

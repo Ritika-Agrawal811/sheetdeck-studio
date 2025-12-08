@@ -10,6 +10,7 @@
   --background: #fefefe;
   --text-color: #171717;
 
+  --light-blue-color: #eef4fc;
   --blue-color: #3b82f6;
   --hover-blue-color: #2056cc;
 
@@ -53,7 +54,7 @@ body {
   font-weight: 400;
   src:
     local(''),
-    url('assets/fonts/nunito-v16-latin-regular.woff2') format('woff2');
+    url('../static/assets/fonts/nunito-v16-latin-regular.woff2') format('woff2');
 }
 
 #app {

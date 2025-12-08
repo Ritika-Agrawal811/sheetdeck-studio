@@ -73,12 +73,20 @@ type RoutesStatsResponse struct {
 }
 
 type CountriesStatsResponse struct {
-	Period              string     `json:"period"`
-	StartDate           time.Time  `json:"start_date"`
-	EndDate             time.Time  `json:"end_date"`
-	TotalViews          int64      `json:"total_views"`
-	TotalUniqueVisitors int64      `json:"total_unique_visitors"`
-	Countries           []DataStat `json:"countries"`
+	Period              string        `json:"period"`
+	StartDate           time.Time     `json:"start_date"`
+	EndDate             time.Time     `json:"end_date"`
+	TotalViews          int64         `json:"total_views"`
+	TotalUniqueVisitors int64         `json:"total_unique_visitors"`
+	Countries           []CountryStat `json:"countries"`
+}
+
+type CountryStat struct {
+	Name        string `json:"name"`
+	Views       int64  `json:"views"`
+	Visitors    int64  `json:"visitors"`
+	Code        string `json:"code"`
+	NumericCode string `json:"numeric_code"`
 }
 
 type DataStat struct {

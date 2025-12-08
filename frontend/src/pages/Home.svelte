@@ -1,27 +1,37 @@
-<section>
+<section class="home-page">
   <h2 class="heading">Overview</h2>
-  <header class="stat-cards-container">
+  <header>
     <!-- Total cheat sheets card -->
-    <StatCard label="Total Cheat sheets" variant="fill" redirect="cheatsheet" value={stats.totalCheatsheets} />
+    <CheatsheetStatCard value={stats.totalCheatsheets} />
 
-    <!-- Total views card -->
-    <StatCard label="Total Views" icon={ChartNoAxesCombined} value={stats.totalViews} />
+    <div class="stat-cards-container">
+      <!-- Total views card -->
+      <StatCard label="Total Views" icon={ChartNoAxesCombined} value={stats.totalViews} />
 
-    <!-- Total visitors card -->
-    <StatCard label="Total Visitors" icon={Users} value={stats.totalUniqueVisitors} />
+      <!-- Total visitors card -->
+      <StatCard label="Total Visitors" icon={Users} value={stats.totalUniqueVisitors} />
 
-    <div class="header-aside">
       <!-- Total clicks card -->
-      <StatCard label="Downloads" layout="horizontal" icon={MousePointerClick} value={stats.totalClicks} />
+      <StatCard label="Downloads" icon={MousePointerClick} value={stats.totalClicks} />
 
       <!-- Total downloads card -->
-      <StatCard label="Clicks" layout="horizontal" icon={Download} value={stats.totalDownloads} />
+      <StatCard label="Clicks" icon={Download} value={stats.totalDownloads} />
     </div>
+
+    <StorageStatCard />
   </header>
+  <section class="world-map-section">
+    <CountriesWorldMap />
+    <TopCheatsheets />
+  </section>
 </section>
 
 <script lang="ts">
   import { ChartNoAxesCombined, Users, MousePointerClick, Download } from 'lucide-svelte';
+  import CheatsheetStatCard from '../components/features/stats/CheatsheetStatCard.svelte';
+  import StorageStatCard from '../components/features/stats/StorageStatCard.svelte';
+  import TopCheatsheets from '../components/features/stats/TopCheatsheets.svelte';
+  import CountriesWorldMap from '../components/features/stats/CountriesWorldMap.svelte';
   import StatCard from '../components/features/stats/StatCard.svelte';
 
   import { getConfig } from '../queries/config';
@@ -38,17 +48,22 @@
 </script>
 
 <style>
-  .stat-cards-container {
-    display: flex;
-    gap: 1em;
+  header {
+    display: grid;
+    grid-template-columns: 0.9fr 1fr 1.4fr;
+    gap: 1.5em;
   }
 
-  .header-aside {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-height: 160px;
-    gap: 1em;
+  .stat-cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+  }
+
+  .world-map-section {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 1.5em;
+    margin-top: 1.5em;
   }
 </style>

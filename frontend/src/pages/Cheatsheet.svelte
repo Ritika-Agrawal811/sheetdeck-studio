@@ -78,7 +78,7 @@
   let tableElement: TableComponent;
 
   $: selectedFilter = (filters.find((p) => p.label === sortLabel)?.value as SortFilters) ?? 'recent';
-  $: cheatsheets = getCheatSheets(activeCategory, activeSubcategory, selectedFilter);
+  $: cheatsheets = getCheatSheets(activeCategory, activeSubcategory, selectedFilter, 15);
 
   const setLayout = (layoutType: 'grid' | 'table') => {
     layout = layoutType;
