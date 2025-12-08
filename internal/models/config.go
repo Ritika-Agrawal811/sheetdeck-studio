@@ -28,15 +28,37 @@ type GlobalStats struct {
 }
 
 type UsageResponse struct {
-	Database  ResourceUsage `json:"database"`
-	Storage   ResourceUsage `json:"storage"`
+	Database  DatabaseUsage `json:"database"`
+	Storage   StorageUsage  `json:"storage"`
 	Timestamp string        `json:"timestamp"`
 }
 
-type ResourceUsage struct {
-	SizeBytes    int64   `json:"size_bytes"`
-	SizePretty   string  `json:"size_pretty"`
-	LimitBytes   int64   `json:"limit_bytes"`
-	LimitPretty  string  `json:"limit_pretty"`
-	UsagePercent float64 `json:"usage_percent"`
+type DatabaseUsage struct {
+	SizeBytes     int64       `json:"size_bytes"`
+	SizePretty    string      `json:"size_pretty"`
+	LimitBytes    int64       `json:"limit_bytes"`
+	LimitPretty   string      `json:"limit_pretty"`
+	UsagePercent  float64     `json:"usage_percent"`
+	LargestTables []TableData `json:"tables"`
+}
+
+type TableData struct {
+	Schema string `json:"schema_name"`
+	Name   string `json:"table_name"`
+	Size   string `json:"size"`
+}
+
+type StorageUsage struct {
+	SizeBytes    int64      `json:"size_bytes"`
+	SizePretty   string     `json:"size_pretty"`
+	LimitBytes   int64      `json:"limit_bytes"`
+	LimitPretty  string     `json:"limit_pretty"`
+	UsagePercent float64    `json:"usage_percent"`
+	Files        []FileData `json:"files"`
+}
+
+type FileData struct {
+	Title    string `json:"title"`
+	Category string `json:"category"`
+	Size     string `json:"size"`
 }

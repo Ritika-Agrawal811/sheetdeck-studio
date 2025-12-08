@@ -14,12 +14,10 @@
         <tr>
           <td>{item.title}</td>
           <td>
-            <div class="tag" style="--color: {getColor(item.category)}">
-              {getCategory(item.category)}
-            </div>
+            <CategoryTag category={item.category} />
           </td>
           <td>{getCellValue(item, selectedFilter)}</td>
-          <td>{formatFileSize(item.imageSize)}</td>
+          <td>{formatSize(item.imageSize)}</td>
         </tr>
       {/each}
     </tbody>
@@ -27,10 +25,11 @@
 </div>
 
 <script lang="ts">
+  import CategoryTag from './CategoryTag.svelte';
+
   import type { Cheatsheet, SortFilters } from '../../../types/cheatsheet';
-  import { CATEGORIES_INFO, type CategoryKey } from '../../../constants/categories';
   import { formatDate } from '../../../utils/formatDate';
-  import { formatFileSize } from '../../../utils/formatFileSize';
+  import { formatSize } from '../../../utils/formatSize';
 
   export let data: Cheatsheet[];
   export let selectedFilter: SortFilters = 'recent';
@@ -48,14 +47,6 @@
     if (filter.includes('downloaded')) return item.downloads;
     if (filter.includes('viewed')) return item.views;
     return formatDate(item.createdAt);
-  };
-
-  const getCategory = (category: string) => {
-    return CATEGORIES_INFO[category as CategoryKey].title;
-  };
-
-  const getColor = (category: string) => {
-    return CATEGORIES_INFO[category as CategoryKey].color;
   };
 
   export function scrollBy(options: ScrollToOptions) {
@@ -96,15 +87,6 @@
 
   th {
     padding: 1.65em 1em;
-  }
-
-  .tag {
-    border: 1px solid var(--color);
-    color: var(--color);
-    border-radius: 100vmax;
-    padding: 0.2em 0.75em;
-    font-size: 0.8rem;
-    width: fit-content;
   }
 
   .w-40 {

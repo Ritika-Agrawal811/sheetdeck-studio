@@ -73,7 +73,15 @@ export type CountriesData = {
   period: string;
   startDate: string;
   endDate: string;
-  countries: DataStat[];
+  countries: CountryStat[];
+};
+
+type CountryStat = {
+  name: string;
+  code: string;
+  numericCode: string;
+  views: number;
+  visitors: number;
 };
 
 type DataStat = {

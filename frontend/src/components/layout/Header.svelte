@@ -18,7 +18,7 @@
 </header>
 
 <script>
-  import logo from '../../assets/images/logo.png';
+  import logo from '../../../static/assets/images/logo.png';
 
   import { isAuthenticated, logout } from '../../stores/auth';
   import { LogOut } from 'lucide-svelte';

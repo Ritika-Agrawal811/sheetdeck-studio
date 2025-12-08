@@ -6,8 +6,9 @@ import type { Cheatsheet, SortFilters } from '../types/cheatsheet';
 export const fetchCheatsheets = async (
   category: string,
   subcategory: string,
-  sort: SortFilters
+  sort: SortFilters,
+  limit: number
 ): Promise<Cheatsheet[]> => {
-  const response = await GetCheatSheets(category, subcategory, sort);
+  const response = await GetCheatSheets(category, subcategory, sort, limit);
   return snakeToCamel(response);
 };

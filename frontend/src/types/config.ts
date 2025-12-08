@@ -26,13 +26,35 @@ export type GlobalStats = {
 };
 
 export type StorageDetails = {
-  database: Usage;
-  storage: Usage;
+  database: Usage & Tables;
+  storage: Usage & Files;
   timestamp: string;
 };
 
 type Usage = {
-  limitPretty: string;
+  sizeBytes: number;
   sizePretty: string;
+  limitBytes: number;
+  limitPretty: string;
   usagePercent: number;
+};
+
+type Tables = {
+  tables: TableData[];
+};
+
+type TableData = {
+  schemaName: string;
+  tableName: string;
+  size: string;
+};
+
+type Files = {
+  files: FileData[];
+};
+
+type FileData = {
+  title: string;
+  category: string;
+  size: string;
 };

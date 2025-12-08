@@ -22,8 +22,8 @@
   import TabList from '../../common/TabList.svelte';
   import Arc from '../charts/Arc.svelte';
 
-  import { categoryStatsToArcChartData, subcategoryStatstoArcChartData } from '../../../utils/prepareChartData';
   import { getConfig } from '../../../queries/config';
+  import { categoryStatsToArcChartData, subcategoryStatstoArcChartData } from '../../../utils/prepareChartData';
 
   export let activeCategory: string | null = null;
   export let activeSubcategory: string | null = null;
