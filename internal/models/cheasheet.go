@@ -28,3 +28,10 @@ type CheatsheetMetadata struct {
 	Category    string `json:"category" binding:"required"`
 	SubCategory string `json:"subcategory" binding:"required"`
 }
+
+type CheatsheetsConfig struct {
+	Category    string
+	Subcategory string
+	Sort        string
+	Limit       int
+}

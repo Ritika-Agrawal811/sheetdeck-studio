@@ -34,7 +34,7 @@
   export let data: Cheatsheet[];
   export let selectedFilter: SortFilters = 'recent';
 
-  let tableElement: HTMLDivElement | undefined = undefined;
+  let tableElement: HTMLElement | undefined = undefined;
   export { tableElement as this };
 
   const getColumnHeader = (filter: SortFilters) => {
@@ -49,8 +49,9 @@
     return formatDate(item.createdAt);
   };
 
-  export function scrollBy(options: ScrollToOptions) {
-    tableElement?.scrollBy(options);
+  // Expose the element so parent can access it
+  export function getScrollContainer(): HTMLElement | null {
+    return tableElement || null;
   }
 </script>
 

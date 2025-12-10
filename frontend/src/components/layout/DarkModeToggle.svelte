@@ -57,11 +57,13 @@
   }
 
   /* ---- active classes ---- */
+
   .active.icon {
     color: var(--text-color);
   }
 
   /* Move indicator based on dark mode state */
+
   .toggle:has(.moon-icon.active) .indicator {
     left: 0.45rem;
   }

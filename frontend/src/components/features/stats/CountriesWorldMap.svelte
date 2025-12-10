@@ -36,21 +36,20 @@
 
 <style>
   .countries-world-map {
-    border-radius: 10px;
-    /* border: 1px solid var(--gray-color); */
-    background-color: var(--light-blue-color);
     height: 39dvh;
-  }
-
-  .countries-world-map h3 {
-    padding: 1em 1em 0;
-    margin-bottom: -0.5em;
-    color: var(--hover-blue-color);
+    border-radius: 10px;
+    background-color: var(--light-blue-color);
   }
 
   @media (min-width: 1440px) {
     .countries-world-map {
       height: 40dvh;
     }
+  }
+
+  .countries-world-map h3 {
+    padding: 1em 1em 0;
+    margin-bottom: -0.5em;
+    color: var(--hover-blue-color);
   }
 </style>

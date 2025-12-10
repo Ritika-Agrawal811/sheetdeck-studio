@@ -1,10 +1,7 @@
 <div class="top-cheatsheets-container">
   <header>
     <h3 class="sub-heading">Most Viewed Cheat Sheets</h3>
-    <div class="scroll-buttons">
-      <button class="scroll-btn" on:click={scrollLeft}><ArrowLeft size={20} /></button>
-      <button class="scroll-btn" on:click={scrollRight}><ArrowRight size={20} /></button>
-    </div>
+    <ScrollButtons scrollContainer={element} valueToScroll={300} />
   </header>
   {#if $cheatsheets.isLoading}
     <div class="skeleton-card" style="height: 20dvh; margin-top: 1em;">
@@ -32,28 +29,15 @@
 </div>
 
 <script lang="ts">
-  import CategoryTag from '../cheatsheet-display/CategoryTag.svelte';
-  import { ArrowDownToLine, ChartNoAxesColumn, ArrowLeft, ArrowRight } from 'lucide-svelte';
+  import ScrollButtons from '../../common/ScrollButtons.svelte';
+  import CategoryTag from './CategoryTag.svelte';
+  import { ArrowDownToLine, ChartNoAxesColumn } from 'lucide-svelte';
 
   import { getCheatSheets } from '../../../queries/cheatsheets';
 
   let element: HTMLElement | undefined = undefined;
 
   $: cheatsheets = getCheatSheets('', '', 'most_viewed', 5);
-
-  /* helper function to handle scroll up */
-  const scrollLeft = () => {
-    if (element) {
-      element.scrollBy({ left: -300, behavior: 'smooth' });
-    }
-  };
-
-  /* helper function to handle scroll down */
-  const scrollRight = () => {
-    if (element) {
-      element.scrollBy({ left: 300, behavior: 'smooth' });
-    }
-  };
 </script>
 
 <style>
@@ -77,29 +61,6 @@
   header {
     display: flex;
     justify-content: space-between;
-  }
-
-  .scroll-buttons {
-    display: flex;
-    gap: 0.5em;
-    justify-content: center;
-  }
-
-  .scroll-btn {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 1px solid var(--gray-color);
-    background-color: var(--background);
-    color: var(--blue-color);
-    cursor: pointer;
-  }
-
-  .scroll-btn:hover {
-    background-color: var(--light-gray-color);
   }
 
   .cheatsheets-list {

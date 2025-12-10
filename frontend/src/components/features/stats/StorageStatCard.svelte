@@ -1,24 +1,5 @@
 <section class="storage-stat-card">
-  <nav>
-    <!-- Tabs List -->
-    <ul role="tablist" class="tabs">
-      {#each tabs as tab}
-        <li
-          role="tab"
-          tabindex={activeTab === tab.name ? 0 : -1}
-          class="tab {activeTab === tab.name ? 'active' : null}"
-          on:click={() => setActiveTab(tab.name)}
-          on:keydown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              setActiveTab(tab.name);
-            }
-          }}
-        >
-          {tab.label}
-        </li>
-      {/each}
-    </ul>
-  </nav>
+  <TabMenu {tabs} bind:activeTab />
   <div class="main">
     {#key activeTab}
       {#if $usage.isLoading}
@@ -34,6 +15,7 @@
             <span class="limit">{info.limitPretty}</span>
           </p>
         </div>
+
         <!-- Database Top Tables -->
         {#if activeTab === 'database'}
           <div class="top-tables">
@@ -47,8 +29,10 @@
               {/each}
             </ul>
           </div>
-          <!-- Storage Top File -->
-        {:else}
+        {/if}
+
+        <!-- Storage Top File -->
+        {#if activeTab === 'storage'}
           <div class="top-files">
             <h4>Top Files</h4>
             <ul class="list">
@@ -72,6 +56,7 @@
 <script lang="ts">
   import PartialArc from '../charts/PartialArc.svelte';
   import CategoryTag from '../cheatsheet-display/CategoryTag.svelte';
+  import TabMenu from '../../common/TabMenu.svelte';
 
   import { getUsage } from '../../../queries/config';
   import { formatSize } from '../../../utils/formatSize';
@@ -82,10 +67,6 @@
   ];
 
   let activeTab: string = 'database';
-
-  const setActiveTab = (tab: string) => {
-    activeTab = tab;
-  };
 
   $: usage = getUsage();
   $: databaseUsage = $usage.data?.database ?? {
@@ -108,30 +89,6 @@
     border-radius: 10px;
     border: 1px solid var(--gray-color);
     padding: 1em;
-  }
-
-  .tabs {
-    display: flex;
-    gap: 1em;
-    list-style: none;
-  }
-
-  .tab {
-    cursor: pointer;
-    border: 1px solid var(--gray-color);
-    border-radius: 100vmax;
-    padding: 0.5em 1em;
-    font-size: 0.95em;
-  }
-
-  .tab:hover {
-    background-color: var(--light-gray-color);
-  }
-
-  .tab.active {
-    background-color: var(--orange-color);
-    color: white;
-    border-color: var(--orange-color);
   }
 
   .main {

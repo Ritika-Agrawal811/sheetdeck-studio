@@ -50,14 +50,12 @@
   import { activePath, setActivePath } from '../../stores/navigate';
   import type { Paths } from '../../stores/navigate';
 
-  /* ---- Toggle sidebar width ---- */
   export let isMinimized = false;
 
   const toggleSidebar = () => {
     isMinimized = !isMinimized;
   };
 
-  /* ---- Handle Navigation links ---- */
   type NavItem = {
     label: string;
     icon: ComponentType;
@@ -121,12 +119,14 @@
   }
 
   /* ---- upload button ---- */
+
   .upload-btn.selected :global(button) {
     background-color: var(--orange-color);
     color: var(--background);
   }
 
   /* ---- main menu ---- */
+
   .menu ul {
     list-style-type: none;
     display: flex;

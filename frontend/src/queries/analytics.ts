@@ -11,6 +11,12 @@ import {
 
 import type { Period } from '../types/analytics';
 
+/**
+ * Query to fetch metrics overview data.
+ *
+ * @param period
+ * @returns PageviewsData
+ */
 export const getMetricsAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['pageviews', period],
@@ -21,6 +27,12 @@ export const getMetricsAnalytics = (period: Period) => {
   });
 };
 
+/**
+ * Query to fetch devices statistics data.
+ *
+ * @param period
+ * @returns DeviceData
+ */
 export const getDevicesAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['devices', period],
@@ -31,6 +43,12 @@ export const getDevicesAnalytics = (period: Period) => {
   });
 };
 
+/**
+ * Query to fetch browser statistics data.
+ *
+ * @param period
+ * @returns BrowserData
+ */
 export const getBrowsersAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['browsers', period],
@@ -41,6 +59,12 @@ export const getBrowsersAnalytics = (period: Period) => {
   });
 };
 
+/**
+ * Query to fetch operating systems statistics data.
+ *
+ * @param period
+ * @returns OperatingSystemData
+ */
 export const getOperatingSystemsAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['operatingSystems', period],
@@ -51,6 +75,12 @@ export const getOperatingSystemsAnalytics = (period: Period) => {
   });
 };
 
+/**
+ * Query to fetch referrer statistics data.
+ *
+ * @param period
+ * @returns ReferrersData
+ */
 export const getReferrersAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['referrers', period],
@@ -61,6 +91,12 @@ export const getReferrersAnalytics = (period: Period) => {
   });
 };
 
+/**
+ * Query to fetch routes statistics data.
+ *
+ * @param period
+ * @returns RoutesData
+ */
 export const getRoutesAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['routes', period],
@@ -71,6 +107,12 @@ export const getRoutesAnalytics = (period: Period) => {
   });
 };
 
+/**
+ * Query to fetch countrues statistics data.
+ *
+ * @param period
+ * @returns CountriesData
+ */
 export const getCountriesAnalytics = (period: Period) => {
   return createQuery({
     queryKey: ['countries', period],

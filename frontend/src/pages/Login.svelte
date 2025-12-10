@@ -1,8 +1,11 @@
 <section class="login-page">
+  <!-- Background Circles -->
   <div class="circle bottom-left large orange"></div>
   <div class="circle middle-left small gray"></div>
   <div class="circle middle-right large gray"></div>
   <div class="circle top-right small orange"></div>
+
+  <!-- Login Form -->
   <div class="container">
     <h2>Login</h2>
     <form on:submit|preventDefault={handleLogin}>
@@ -30,12 +33,10 @@
   import { login } from '../stores/auth';
   import { onMount } from 'svelte';
 
-  /* ----- Auth variables ------- */
   let email = '';
   let password = '';
   let isMacOS = false;
 
-  /* ---- Detect if the device is MacOS ---- */
   onMount(async () => {
     isMacOS = await IsMacOS();
   });

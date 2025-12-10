@@ -1,24 +1,6 @@
 <section class="referrers-routes-chart-container">
-  <nav>
-    <!-- Tabs List -->
-    <ul role="tablist" class="tabs">
-      {#each tabs as tab}
-        <li
-          role="tab"
-          tabindex={activeTab === tab.name ? 0 : -1}
-          class="tab {activeTab === tab.name ? 'active' : null}"
-          on:click={() => setActiveTab(tab.name)}
-          on:keydown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              setActiveTab(tab.name);
-            }
-          }}
-        >
-          {tab.label}
-        </li>
-      {/each}
-    </ul>
-  </nav>
+  <TabMenu {tabs} bind:activeTab />
+
   <!-- List -->
   <div class="main">
     {#key activeTab}
@@ -98,6 +80,7 @@
 <script lang="ts">
   import { Maximize2 } from 'lucide-svelte';
   import Modal from '../../common/Modal.svelte';
+  import TabMenu from '../../common/TabMenu.svelte';
 
   import { getReferrersAnalytics, getRoutesAnalytics } from '../../../queries/analytics';
   import { extractDomain, getFaviconUrl } from '../../../utils/getUrlDetails';
@@ -109,15 +92,12 @@
   ];
 
   export let selectedPeriod: Period = '7d';
-  export let isModalOpen: boolean = false;
+
+  let isModalOpen: boolean = false;
   let activeTab: string = 'referrer';
 
   $: referrerStats = getReferrersAnalytics(selectedPeriod);
   $: routesStats = getRoutesAnalytics(selectedPeriod);
-
-  const setActiveTab = (tab: string) => {
-    activeTab = tab;
-  };
 
   const openModal = () => {
     isModalOpen = true;
@@ -135,30 +115,6 @@
     padding: 1em;
     overflow: hidden;
     height: 100%;
-  }
-
-  .tabs {
-    display: flex;
-    gap: 1em;
-    list-style: none;
-  }
-
-  .tab {
-    cursor: pointer;
-    border: 1px solid var(--gray-color);
-    border-radius: 100vmax;
-    padding: 0.5em 1em;
-    font-size: 0.95em;
-  }
-
-  .tab:hover {
-    background-color: var(--light-gray-color);
-  }
-
-  .tab.active {
-    background-color: var(--orange-color);
-    color: white;
-    border-color: var(--orange-color);
   }
 
   .main {

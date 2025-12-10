@@ -20,6 +20,7 @@
   }
 
   /* ---- position classes ---- */
+
   .tag.top-left {
     position: absolute;
     left: 0.55em;

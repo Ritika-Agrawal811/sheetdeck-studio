@@ -25,9 +25,9 @@
 
 <script lang="ts">
   import { Chart, Svg, Arc, Group } from 'layerchart';
-  import type { ArcChartData } from '../../../types/chart';
+  import type { ChartData } from '../../../types/chart';
 
-  export let data: ArcChartData[] = [];
+  export let data: ChartData[] = [];
   export let label: string = '';
   export let count: number = 0;
 
