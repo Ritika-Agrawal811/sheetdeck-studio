@@ -1,4 +1,4 @@
-export type ArcChartData = {
+export type ChartData = {
   key: string;
   value: number;
   color: string;
@@ -7,10 +7,4 @@ export type ArcChartData = {
 export type AreaChartData = {
   key: Date;
   value: number;
-};
-
-export type ConcentricArcChartData = {
-  key: string;
-  value: number;
-  color: string;
 };

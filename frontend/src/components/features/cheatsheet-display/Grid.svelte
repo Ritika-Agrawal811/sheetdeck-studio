@@ -28,11 +28,12 @@
   export let data: Cheatsheet[];
   export let selectedFilter: SortFilters = 'recent';
 
-  let gridElement: HTMLDivElement | undefined = undefined;
+  let gridElement: HTMLElement | undefined = undefined;
   export { gridElement as this };
 
-  export function scrollBy(options: ScrollToOptions) {
-    gridElement?.scrollBy(options);
+  // Expose the element so parent can access it
+  export function getScrollContainer(): HTMLElement | null {
+    return gridElement || null;
   }
 </script>
 

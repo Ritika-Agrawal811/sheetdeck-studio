@@ -10,8 +10,8 @@ export function GetBrowsersStats(arg1) {
   return window['go']['main']['App']['GetBrowsersStats'](arg1);
 }
 
-export function GetCheatSheets(arg1, arg2, arg3, arg4) {
-  return window['go']['main']['App']['GetCheatSheets'](arg1, arg2, arg3, arg4);
+export function GetCheatSheets(arg1) {
+  return window['go']['main']['App']['GetCheatSheets'](arg1);
 }
 
 export function GetConfig() {

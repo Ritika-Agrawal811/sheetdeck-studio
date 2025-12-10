@@ -6,7 +6,7 @@
     </button>
   </header>
   <p class="stat">{value}</p>
-  <main>
+  <div>
     <h4>Top Categories</h4>
     <ul class="list">
       {#each categoriesData.slice(0, 2) as item}
@@ -19,7 +19,7 @@
         </li>
       {/each}
     </ul>
-  </main>
+  </div>
 </section>
 
 <script lang="ts">

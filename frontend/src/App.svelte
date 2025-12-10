@@ -10,6 +10,11 @@
 </QueryClientProvider>
 
 <script>
+  // components
+  import Header from './components/layout/Header.svelte';
+  import Login from './pages/Login.svelte';
+  import Dashboard from './pages/Dashboard.svelte';
+
   import { onMount } from 'svelte';
   import { isAuthenticated } from './stores/auth';
   import { configStore } from './stores/config';
@@ -36,9 +41,4 @@
   $: if ($isAuthenticated) {
     configStore.load();
   }
-
-  // components
-  import Header from './components/layout/Header.svelte';
-  import Login from './pages/Login.svelte';
-  import Dashboard from './pages/Dashboard.svelte';
 </script>

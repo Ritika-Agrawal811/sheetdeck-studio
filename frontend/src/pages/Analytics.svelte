@@ -12,13 +12,13 @@
     />
   </header>
   <section class="chart-grid-upper">
-    <AnalyticsPanel bind:selectedPeriod />
-    <DevicesStatCard bind:selectedPeriod />
+    <AnalyticsPanel {selectedPeriod} />
+    <DevicesStatCard {selectedPeriod} />
   </section>
   <section class="chart-grid-lower">
-    <BrowsersAndOSCard bind:selectedPeriod />
-    <ReferrersAndRoutesCard bind:selectedPeriod />
-    <CountriesStatCard bind:selectedPeriod />
+    <BrowsersAndOSCard {selectedPeriod} />
+    <ReferrersAndRoutesCard {selectedPeriod} />
+    <CountriesStatCard {selectedPeriod} />
   </section>
 </section>
 
@@ -28,9 +28,9 @@
   import DevicesStatCard from '../components/features/stats/DevicesStatCard.svelte';
   import BrowsersAndOSCard from '../components/features/stats/BrowsersAndOSCard.svelte';
   import CountriesStatCard from '../components/features/stats/CountriesStatCard.svelte';
+  import ReferrersAndRoutesCard from '../components/features/stats/ReferrersAndRoutesCard.svelte';
 
   import type { Period } from '../types/analytics';
-  import ReferrersAndRoutesCard from '../components/features/stats/ReferrersAndRoutesCard.svelte';
 
   /* ---- time filter dropdown ---- */
   const periods = [

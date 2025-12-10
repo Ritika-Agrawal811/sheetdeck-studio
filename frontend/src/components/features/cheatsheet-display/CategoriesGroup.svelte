@@ -23,7 +23,7 @@
   import Arc from '../charts/Arc.svelte';
 
   import { getConfig } from '../../../queries/config';
-  import { categoryStatsToArcChartData, subcategoryStatstoArcChartData } from '../../../utils/prepareChartData';
+  import { categoryStatsToChartData, subcategoryStatsToChartData } from '../../../utils/prepareChartData';
 
   export let activeCategory: string | null = null;
   export let activeSubcategory: string | null = null;
@@ -32,22 +32,32 @@
 
   $: totalCheatsheets = $configData.data?.stats.totalCheatsheets ?? 0;
   $: categoriesStats = $configData.data?.categoryStats ?? [];
-  $: categoriesData = categoryStatsToArcChartData(categoriesStats);
+  $: categoriesData = categoryStatsToChartData(categoriesStats);
 
   $: subcategories = categoriesStats.find((item) => item.category == activeCategory)?.subcategoriesStats;
-  $: subcategoriesData = subcategories ? subcategoryStatstoArcChartData(subcategories) : [];
+  $: subcategoriesData = subcategories ? subcategoryStatsToChartData(subcategories) : [];
 
   /**
-   * Set active sub category and prepare sub cateogies data for the TabList component
+   * Set active sub category and prepare sub categories data for the TabList component
    */
   $: if (subcategories?.[0]) {
     activeSubcategory = subcategories[0].subcategory;
   }
 
+  /**
+   * Set active category
+   *
+   * @param category
+   */
   const setActiveCategory = (category: string) => {
     activeCategory = category;
   };
 
+  /**
+   * Set active subcategory
+   *
+   * @param subcategory
+   */
   const setActiveSubcategory = (subcategory: string) => {
     activeSubcategory = subcategory;
   };

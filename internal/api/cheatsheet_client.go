@@ -31,14 +31,14 @@ func NewCheatsheetClient(baseURL string) *CheatsheetClient {
  * Get all cheat sheets
  * @return []models.Cheatsheet, error
  */
-func (c *CheatsheetClient) GetCheatsheets(category string, subcategory string, sort string, limit int) ([]models.Cheatsheet, error) {
+func (c *CheatsheetClient) GetCheatsheets(config models.CheatsheetsConfig) ([]models.Cheatsheet, error) {
 
 	// Build the api URL
 	url := utils.NewURLBuilder(c.baseURL, "/cheatsheets").
-		AddParam("category", category).
-		AddParam("subcategory", subcategory).
-		AddParam("sort", sort).
-		AddParam("limit", strconv.Itoa(limit)).
+		AddParam("category", config.Category).
+		AddParam("subcategory", config.Subcategory).
+		AddParam("sort", config.Sort).
+		AddParam("limit", strconv.Itoa(config.Limit)).
 		Build()
 
 	// Make the GET repquest

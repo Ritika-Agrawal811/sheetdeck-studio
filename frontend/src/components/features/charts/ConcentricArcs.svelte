@@ -34,9 +34,9 @@
   import { Chart, Svg, Arc } from 'layerchart';
   import { cubicInOut } from 'svelte/easing';
 
-  import type { ConcentricArcChartData } from '../../../types/chart';
+  import type { ChartData } from '../../../types/chart';
 
-  export let data: ConcentricArcChartData[] = [];
+  export let data: ChartData[] = [];
   export let label: string = '';
 
   $: total = data.reduce((sum, item) => sum + item.value, 0);

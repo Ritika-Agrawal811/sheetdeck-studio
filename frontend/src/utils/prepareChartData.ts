@@ -1,11 +1,17 @@
 import { CATEGORIES_INFO, type CategoryKey } from '../constants/categories';
 
 import type { CategoryStat, SubcategoryStat } from '../types/config';
-import type { ArcChartData, AreaChartData, ConcentricArcChartData } from '../types/chart';
+import type { ChartData, AreaChartData } from '../types/chart';
 import type { PageviewInterval, DeviceData } from '../types/analytics';
 import { DEVICES, type Metric } from '../constants/metrics';
 
-export const categoryStatsToArcChartData = (stats: CategoryStat[]): ArcChartData[] => {
+/**
+ * Converts category stats to ChartData format
+ *
+ * @param stats
+ * @returns ChartData[]
+ */
+export const categoryStatsToChartData = (stats: CategoryStat[]): ChartData[] => {
   return stats.map((stat) => ({
     key: CATEGORIES_INFO[stat.category as CategoryKey].title,
     value: stat.totalCount,
@@ -13,7 +19,13 @@ export const categoryStatsToArcChartData = (stats: CategoryStat[]): ArcChartData
   }));
 };
 
-export const subcategoryStatstoArcChartData = (stats: SubcategoryStat[]): ArcChartData[] => {
+/**
+ * Converts subcategory stats to ChartData format
+ *
+ * @param stats
+ * @returns ChartData[]
+ */
+export const subcategoryStatsToChartData = (stats: SubcategoryStat[]): ChartData[] => {
   return stats.map((stat) => ({
     key: stat.subcategory,
     value: stat.count,
@@ -21,16 +33,29 @@ export const subcategoryStatstoArcChartData = (stats: SubcategoryStat[]): ArcCha
   }));
 };
 
-export const pageviewsStatstoAreaChartData = (stats: PageviewInterval[]): AreaChartData[] => {
+/**
+ * Converts pageview intervals to AreaChartData format
+ *
+ * @param stats
+ * @returns AreaChartData[]
+ */
+export const pageviewsStatsToAreaChartData = (stats: PageviewInterval[]): AreaChartData[] => {
   return stats.map((stat) => ({
     key: new Date(stat.date),
     value: stat.views,
   }));
 };
 
-export const devicesStatsToConcentricArcChartData = (stats: DeviceData, type: Metric): ConcentricArcChartData[] => {
+/**
+ *
+ * @param stats
+ * @param type
+ * @returns
+ */
+export const devicesStatsToChartData = (stats: DeviceData, type: Metric): ChartData[] => {
   const response = DEVICES.map((item) => {
     const metric = item.keys[type];
+
     return {
       key: item.type,
       value: metric ? stats[metric] : 0,

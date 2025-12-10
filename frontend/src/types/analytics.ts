@@ -1,16 +1,19 @@
 import type { Metric } from '../constants/metrics';
 
-export type Period = '24h' | '7d' | '30d' | '3m' | '6m' | '12m';
+export type Period = '24h' | '7d' | '30d' | '3m';
 
 export type MetricsData = {
   type: Metric;
   value: number;
 };
 
-export type PageviewsData = {
-  period: string;
+type TimeRange = {
+  period: Period;
   startDate: string;
   endDate: string;
+};
+
+export type PageviewsData = TimeRange & {
   totalViews: number;
   totalUniqueVisitors: number;
   intervals: PageviewInterval[];
@@ -22,10 +25,7 @@ export type PageviewInterval = {
   visitors: number;
 };
 
-export type DeviceData = {
-  period: string;
-  startDate: string;
-  endDate: string;
+export type DeviceData = TimeRange & {
   totalMobileViews: number;
   totalMobileVisitors: number;
   totalDesktopViews: number;
@@ -41,38 +41,23 @@ type DeviceInterval = {
   desktopVisitors: number;
 };
 
-export type BrowserData = {
-  period: string;
-  startDate: string;
-  endDate: string;
+export type BrowserData = TimeRange & {
   browsers: DataStat[];
 };
 
-export type OperatingSystemData = {
-  period: string;
-  startDate: string;
-  endDate: string;
+export type OperatingSystemData = TimeRange & {
   operatingSystems: DataStat[];
 };
 
-export type ReferrersData = {
-  period: string;
-  startDate: string;
-  endDate: string;
+export type ReferrersData = TimeRange & {
   referrers: DataStat[];
 };
 
-export type RoutesData = {
-  period: string;
-  startDate: string;
-  endDate: string;
+export type RoutesData = TimeRange & {
   routes: DataStat[];
 };
 
-export type CountriesData = {
-  period: string;
-  startDate: string;
-  endDate: string;
+export type CountriesData = TimeRange & {
   countries: CountryStat[];
 };
 

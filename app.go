@@ -57,8 +57,8 @@ func (a *App) AuthenticateWithTouchID() (bool, error) {
 
 /* ---- Cheatsheet APIs ---- */
 
-func (a *App) GetCheatSheets(category string, subcategory string, sort string, limit int) ([]models.Cheatsheet, error) {
-	return a.cheatsheetClient.GetCheatsheets(category, subcategory, sort, limit)
+func (a *App) GetCheatSheets(config models.CheatsheetsConfig) ([]models.Cheatsheet, error) {
+	return a.cheatsheetClient.GetCheatsheets(config)
 }
 
 func (a *App) UploadCheatsheet(slug, title, category, subcategory string, image []byte) error {

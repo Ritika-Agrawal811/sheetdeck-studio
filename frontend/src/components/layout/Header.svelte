@@ -18,13 +18,13 @@
 </header>
 
 <script>
+  import Button from '../common/Button.svelte';
+  import DarkModeToggle from './DarkModeToggle.svelte';
+  import Searchbar from './Searchbar.svelte';
   import logo from '../../../static/assets/images/logo.png';
 
   import { isAuthenticated, logout } from '../../stores/auth';
   import { LogOut } from 'lucide-svelte';
-  import Button from '../common/Button.svelte';
-  import DarkModeToggle from './DarkModeToggle.svelte';
-  import Searchbar from './Searchbar.svelte';
 </script>
 
 <style>

@@ -5,12 +5,8 @@ export type CheatsheetMetadata = {
   subcategory: string;
 };
 
-export type Cheatsheet = {
+export type Cheatsheet = CheatsheetMetadata & {
   id: string;
-  slug: string;
-  title: string;
-  category: string;
-  subcategory: string;
   imageUrl: string;
   imageSize: number;
   createdAt: string;

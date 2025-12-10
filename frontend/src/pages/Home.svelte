@@ -30,7 +30,7 @@
   import { ChartNoAxesCombined, Users, MousePointerClick, Download } from 'lucide-svelte';
   import CheatsheetStatCard from '../components/features/stats/CheatsheetStatCard.svelte';
   import StorageStatCard from '../components/features/stats/StorageStatCard.svelte';
-  import TopCheatsheets from '../components/features/stats/TopCheatsheets.svelte';
+  import TopCheatsheets from '../components/features/cheatsheet-display/TopCheatsheets.svelte';
   import CountriesWorldMap from '../components/features/stats/CountriesWorldMap.svelte';
   import StatCard from '../components/features/stats/StatCard.svelte';
 

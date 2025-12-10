@@ -28,7 +28,7 @@
         </li>
       {/each}
     </ul>
-    <Area data={pageviewsStatstoAreaChartData($pageviewsStats.data.intervals)} />
+    <Area data={pageviewsStatsToAreaChartData($pageviewsStats.data.intervals)} />
   </section>
 {/if}
 
@@ -39,7 +39,7 @@
   import type { MetricsData, Period } from '../../../types/analytics';
 
   import { getMetricsAnalytics } from '../../../queries/analytics';
-  import { pageviewsStatstoAreaChartData } from '../../../utils/prepareChartData';
+  import { pageviewsStatsToAreaChartData } from '../../../utils/prepareChartData';
 
   export let selectedPeriod: Period = '7d';
   export let selectedMetric: Metric = 'page views';
@@ -101,6 +101,7 @@
   }
 
   /* ---- skeleton container ---- */
+
   .skeleton-card {
     height: 400px;
     border-radius: 10px;

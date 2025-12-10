@@ -18,11 +18,14 @@
   import type { FeatureCollection, Geometry } from 'geojson';
   import { onMount } from 'svelte';
 
-  // User data by country ID
   export let userData: Record<string, number> = {};
 
   let countries: FeatureCollection<Geometry> | null = null;
 
+  /**
+   * Load world map topology data on component mount
+   * Filter out Antarctica (ID: "010") for better visualization
+   */
   onMount(async () => {
     try {
       const response = await fetch('/static/assets/json/countries-110m.json');
@@ -33,7 +36,6 @@
 
       const allCountries = feature(worldTopology, worldTopology.objects.countries) as FeatureCollection<Geometry>;
 
-      // Filter out Antarctica (ID: "010")
       countries = {
         type: 'FeatureCollection',
         features: allCountries.features.filter((feature) => feature.id !== '010'),
@@ -43,6 +45,11 @@
     }
   });
 
+  /**
+   * Get color for a country based on user data intensity
+   *
+   * @param countryId
+   */
   function getCountryColor(countryId: string | number | undefined): string {
     if (!countryId) return '#fefefe';
 
@@ -52,7 +59,6 @@
     const maxCount = Math.max(...Object.values(userData));
     const intensity = count / maxCount;
 
-    // Blue gradient from light to dark
     const r = Math.floor(59 + (1 - intensity) * 50);
     const g = Math.floor(130 + (1 - intensity) * 10);
     const b = 246;
@@ -60,7 +66,6 @@
     return `rgb(${r}, ${g}, ${b})`;
   }
 
-  // Create projection and path generator
   let projection: GeoProjection | null = null;
   let pathGenerator: GeoPath<any, any> | null = null;
 

@@ -157,6 +157,24 @@ export namespace models {
       return a;
     }
   }
+  export class CheatsheetsConfig {
+    Category: string;
+    Subcategory: string;
+    Sort: string;
+    Limit: number;
+
+    static createFrom(source: any = {}) {
+      return new CheatsheetsConfig(source);
+    }
+
+    constructor(source: any = {}) {
+      if ('string' === typeof source) source = JSON.parse(source);
+      this.Category = source['Category'];
+      this.Subcategory = source['Subcategory'];
+      this.Sort = source['Sort'];
+      this.Limit = source['Limit'];
+    }
+  }
   export class GlobalStats {
     total_cheatsheets: number;
     total_views: number;
