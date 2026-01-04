@@ -32,6 +32,7 @@
     "d3-geo": "^3.1.1",
     "d3-scale": "^4.0.2",
     "highlight.js": "^11.11.1",
+    "layerchart": "^1.0.12",
     "lucide-svelte": "^0.545.0",
     "svelte-icons": "^2.1.0",
     "topojson-client": "^3.1.0"
