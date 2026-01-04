@@ -10,6 +10,8 @@
 
 It is developed using **Wails**, with a **Go backend** and a **Svelte frontend**, and connects to the [Sheetdeck backend server](https://github.com/Ritika-Agrawal811/sheetdeck-backend) to manage cheat sheets, analytics, and configuration data through a unified interface.
 
+<img src="./demo/home-page.png" width="100%">
+
 <br/>
 
 ## 🎯 Why This Project?
