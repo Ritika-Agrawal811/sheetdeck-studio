@@ -10,12 +10,16 @@
 
 It is developed using **Wails**, with a **Go backend** and a **Svelte frontend**, and connects to the [Sheetdeck backend server](https://github.com/Ritika-Agrawal811/sheetdeck-backend) to manage cheat sheets, analytics, and configuration data through a unified interface.
 
+<br/>
+
 ## 🎯 Why This Project?
 
 The goals of this project include :
 - Providing a dedicated admin interface for managing content and analytics for the **Sheetdeck** platform.
 - Creating a fast, cross-platform desktop tool that allows efficient content management, monitoring, and configuration without relying on browser-based admin panels.
 - Gaining hands-on experience building and integrating **Go backends with modern frontend frameworks (Svelte)**
+
+<br/>
 
 ## 🧠 Key Highlights
 
@@ -31,6 +35,8 @@ The goals of this project include :
 - Integrated the upload workflow with the backend APIs to store cheat sheets and assets in **Supabase and Supabase Storage**
 - Used **@tanstack/svelte-query** to manage API state, caching, and async workflows in the dashboard
 
+<br/>
+
 ## 🛠 Tech Stack
 
 - **Desktop Framework:** Wails
@@ -42,6 +48,8 @@ The goals of this project include :
 - **Authentication:** macOS biometric (fingerprint) authentication
 - **API Integration:** REST APIs provided by `sheetdeck-backend`
 - **Tooling:** Go modules, Vite (Svelte), standard Wails tooling
+
+<br/>
 
 ## 🏗 Architecture Overview
 
@@ -72,6 +80,7 @@ flowchart LR
     UI[Svelte UI] -->|Wails Bindings| DesktopGo[Go Backend]
     DesktopGo -->|REST APIs| SheetdeckAPI[sheetdeck-backend]
 ```
+<br/>
 
 ## 📈 Future Improvements
 
@@ -79,11 +88,13 @@ flowchart LR
 - Introduce **dark mode** support to improve usability and accessibility for extended usage
 - Implement **proper authentication for Windows**, including username and password–based login
 
+<br/>
 
 ## 📄 License
 
 The **codebase** of this project is open source and licensed under the [MIT License](./LICENSE).
 
+<br/>
 
 ## 🚫 Contributions
 
